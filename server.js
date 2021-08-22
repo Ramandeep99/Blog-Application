@@ -1,20 +1,22 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose')
 const articleRouter = require('./routes/articles')
-const port = 5000;
+const Article = require('./models/article')
+const port = 2000;
+
+mongoose.connect('mongodb://localhost/blogdb' ,{
+    useUnifiedTopology: true, useNewUrlParser: true
+})
 
 app.set('view engine' , 'ejs');
+app.use(express.urlencoded({extended:false}))
 
-app.use('/articles' , articleRouter)
-
-app.get('/', (req,res) =>{
-    const articles = [{
-        title : "Test Article",
-        createdAt : Date.now(),
-        description: "Test Des"
-    }]
+app.get('/',async (req,res) =>{
+    const articles = await Article.find().sort({ createdAt: 'desc'})
     
-    res.render('index' , {article : articles});
+    res.render('articles/index' , {articles : articles});
 }) 
 
+app.use('/articles' , articleRouter)
 app.listen(port);
