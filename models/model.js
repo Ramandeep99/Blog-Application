@@ -18,7 +18,7 @@ const detailSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    confirm_password: {
+    confirm_password:{
         type:String,
         required:true
     }
@@ -28,11 +28,13 @@ const detailSchema = new mongoose.Schema({
 detailSchema.pre("save" , async function(next){
     if(this.isModified("password")){
         this.password = await bcrypt.hash(this.password, 10);
-
-        this.confirm_password = undefined;
     }
+
+    this.confirm_password = undefined;
     next();
 })
+
+
 
 
 const Detail = new mongoose.model('Detail' , detailSchema)

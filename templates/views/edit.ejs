@@ -17,7 +17,7 @@
     <div class="container">
         <h1 class="mb-4 mt-2">Edit Article</h1>
 
-        <form action="/<%= article.id %>?_method=PUT" method="POST">
+        <form action="/articles/<%= article.id %>?_method=PUT" method="POST">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input required value="<%=article.title %>" type="text" name="title" id="title" class="form-control">
@@ -36,7 +36,7 @@
                 rows="5">
             </div>
             
-            <a href="/" class="btn btn-secondary">Cancel</a>
+            <a href="/home" class="btn btn-secondary">Cancel</a>
             <button class="btn btn-primary" type="submit">Save</button>
         </form>
     </div>
