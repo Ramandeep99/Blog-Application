@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registeration Page</title>
+    <title>Login Page</title>
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -35,23 +35,27 @@
 </head>
 
 <body>
+    <%- include("../partials/navbar") %>
     <div class="container text-center main-div">
         <div class="row justify-content-center">
             <div class="col-lg-4 col-sm-6 col-md-6">
 
-                <form action="/login_signup/login" method="POST" class="form-div">
+                <!-- <form action="/login_signup/login" method="POST" class="form-div"> -->
+                <form  class="form-div" id="form">
                     <h2>LOGIN</h2>
                     <div class="form-group mt-4">
                         <!-- <label for="email"></label> -->
                         <input required value="" type="text" name="email" id="email" class="form-control"
                             placeholder="Email Id">
                     </div>
+                    <div class="form-email"></div>
 
                     <div class="form-group mt-4">
                         <!-- <label for="password"></label> -->
                         <input required value="" type="text" name="password" id="password" class="form-control"
                             placeholder="Password">
                     </div>
+                    <div class="form-password"></div>
 
                     <div class="form-group mt-4">
                         <button class="btn btn-primary btn-block" type="submit" value="Submit"
@@ -68,6 +72,54 @@
             </div>
         </div>
     </div>
+
+    
+    <script>
+
+
+        const formFields = document.querySelector('form');
+
+        const email_error = document.querySelector('.form-email');
+        const password_error = document.querySelector('.form-password');
+
+        formFields.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // reset error-divs
+            email_error.innerText = "";
+            password_error.innerText = "";
+
+            // get values 
+            const email = formFields.email.value;
+            const password = formFields.password.value;
+
+            try {
+                const res = await fetch('/login_signup/login', {
+                    method: "POST",
+                    body: JSON.stringify({ email, password }),
+                    headers: { "Content-Type": "application/json" }
+                });
+
+                const data = await res.json();
+                // console.log(data['email']);
+                if (data['email']) {
+                    email_error.innerText = data.email;
+                }
+                if(data.password){
+                    password_error.innerText = data.password;
+                }
+                if(data.userData) {
+                    location.assign('/home');
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+
+        })
+
+    </script>
+
 </body>
 
 </html>

@@ -21,6 +21,7 @@ router.get('/edit/:id', async (req, res) => {
     res.render("edit", { article: article })
 })
 
+
 router.get('/:slug', async (req, res) => {
     const article = await Article.findOne({ slug: req.params.slug })
     if (article == undefined) {
@@ -31,6 +32,7 @@ router.get('/:slug', async (req, res) => {
     }
 })
 
+
 router.post('/', async (req, res, next) => {
 
     req.article =  new Article()
@@ -40,7 +42,7 @@ router.post('/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
     req.article = await Article.findById(req.params.id)
     next()
-}, PostAndPut('edit'))  
+}, PostAndPut('edit'))
 
 
 function PostAndPut(path) {
@@ -60,11 +62,10 @@ function PostAndPut(path) {
     }
 }
 
-
-
 router.delete('/:id', async (req, res) => {
     await Article.findByIdAndDelete(req.params.id)
     res.redirect('/home')
 })
+
 
 module.exports = router

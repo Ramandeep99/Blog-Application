@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require('path')
-const jwt = require('jsonwebtoken');
+const jwtoken = require('jsonwebtoken');
 const Details = require('./../models/model');
 const bcrypt = require("bcryptjs");
 const { errorMonitor } = require("events");
@@ -59,14 +59,15 @@ module.exports.register_post = async (req, res) => {
             const registered = await detail.save();
 
             // generating jwt at login
-            token = await registered.generateAuthToken();
+            const token = await registered.generateAuthToken();
             // console.log(token);
 
             // storing cookies
             var maxTime = 10 * 60 * 60
             res.cookie("jwtoken", token, {
                 httpOnly: true,
-                expiresIn: maxTime*1000
+                // expiresIn: maxTime*1000
+                expires : new Date(Date.now() + maxTime)
             })
 
             // console.log('99')
@@ -94,11 +95,13 @@ module.exports.login_post = async (req, res) => {
             const isMatch = await bcrypt.compare(password, userData.password);
 
             // generating jwt at login 
-            token = await userData.generateAuthToken();
+            const token = await userData.generateAuthToken();
 
             // storing cookies
+            // var maxTime = 10 * 60 * 60
             res.cookie("jwtoken" , token , {
-                expires: new Date(Date.now() + 300000),
+                expires: new Date(Date.now() + 3600000),
+                // expiresIn: maxTime*1000,
                 httpOnly: true
             })
 
@@ -119,8 +122,12 @@ module.exports.login_post = async (req, res) => {
     }
 }
 
-var maxTime = 1
+
 module.exports.logout_get = (req,res) =>{
-    res.cookie('jwtoken' , "" ,{maxTime});
-    res.redirect('./../login_signup/login')
+    res.cookie('jwtoken' , "" ,{
+        expires: new Date(Date.now() + 1)
+    });
+    res.redirect('/login_signup/login')
 }
+
+

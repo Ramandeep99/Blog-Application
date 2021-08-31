@@ -15,7 +15,6 @@
 
     <style>
         .form-div {
-            /* position: absolute; */
             margin-top: 15vh;
             background: #fff;
             padding: 30px;
@@ -26,39 +25,38 @@
 </head>
 
 <body>
-
+    <%- include("../partials/navbar") %>
     <div class="container text-center main-div">
         <div class="row justify-content-center">
             <div class="col-lg-4 col-sm-6 col-md-6">
 
-                <form action="/login_signup/register" method="POST" class="form-div">
+                <!-- action="/login_signup/register" method="POST" -->
+                <form class="form-div" id="form">
 
                     <h2 class="mb-3">REGISTER</h2>
                     <div class="form-group">
                         <input required value="" type="text" name="name" id="name" class="form-control"
                             placeholder="Name">
-
                     </div>
+                    <div class="form-name"></div>
+
                     <div class="form-group">
                         <input required value="" type="text" name="email" id="email" class="form-control"
                             placeholder="Email Id">
-
                     </div>
-                    <div class="form-group">
-                        <input required value="" type="text" name="contact" id="contact" class="form-control"
-                            placeholder="Contact No">
+                    <div class="form-email"></div>
 
-                    </div>
                     <div class="form-group">
                         <input required value="" type="text" name="password" id="password" class="form-control"
                             placeholder="Password">
-
                     </div>
+                    <div class="form-password"></div>
 
                     <div class="form-group">
                         <input required value="" type="text" name="confirm_password" id="confirm-password"
                             class="form-control" placeholder="Confirm Password">
                     </div>
+                    <div class="form-cpassword"></div>
 
                     <div class="form-group mt-4">
                         <button class="btn btn-primary btn-block" type="submit" value="Submit"
@@ -74,7 +72,57 @@
         </div>
     </div>
 
+    <!-- <script src="./../../public/registerjs.js"></script> -->
 
+
+
+    <script>
+
+
+        const formFields = document.querySelector('form');
+
+        const name_error = document.querySelector('.form-name');
+        const email_error = document.querySelector('.form-email');
+        const password_error = document.querySelector('.form-password');
+        const confirm_password_error = document.querySelector('.form-cpassword');
+
+        formFields.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // reset error-divs
+            email_error.innerText = "";
+            password_error.innerText = "";
+
+            // get values 
+            const name = formFields.name.value;
+            const email = formFields.email.value;
+            const password = formFields.password.value;
+            const confirm_password = formFields.confirm_password.value;
+
+            try {
+                const res = await fetch('/login_signup/register', {
+                    method: "POST",
+                    body: JSON.stringify({ name, email, password, confirm_password }),
+                    headers: { "Content-Type": "application/json" }
+                });
+
+                const data = await res.json();
+                // console.log(data);
+                if (data.errors) {
+                    email_error.innerText = data.errors.email;
+                    password_error.innerText = data.errors.password;
+                }
+                if(data.registered) {
+                    location.assign('/login_signup/login');
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+
+        })
+
+    </script>
 
 </body>
 
