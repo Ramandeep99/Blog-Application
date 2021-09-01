@@ -43,7 +43,6 @@ module.exports.login_get = (req, res) => {
 
 module.exports.register_post = async (req, res) => {
 
-    
     try {
         const password = req.body.password;
         const confirm_password = req.body.confirm_password;

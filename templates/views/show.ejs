@@ -15,23 +15,29 @@
 
 <body>
     <%- include("../partials/navbar") %>
-    <div class="container">
-        <h1 class="mb-4 mt-2"><%= article.title %></h1>
-        <div class="text-muted mb-2">
-            <%= article.createdAt.toLocaleDateString() %>
-        </div>
-        <a href="/home" class="btn btn-secondary">All Articles</a>
-        <a href="edit/<%= article.id %>" class="btn btn-secondary">Edit</a>
+        <div class="container">
+            <h1 class="mb-4 mt-2">
+                <%= article.title %>
+            </h1>
+            <div class="text-muted mb-2">
+                <%= article.createdAt.toLocaleDateString() %>
+            </div>
+            <a href="/home" class="btn btn-secondary">All Articles</a>
 
-        <div>
-            Description: 
-            <%= article.description %>
+            <% if( (article.createdBy)===(user.email) ) { %>
+                <a href="edit/<%= article.id %>" class="btn btn-secondary">Edit</a>
+                <% } else { %>
+                    <div></div>
+                    <% } %>
+                        <div>
+                            Description:
+                            <%= article.description %>
+                        </div>
+                        <div>
+                            Markdowm:
+                            <%= article.markdown %>
+                        </div>
         </div>
-        <div>
-            Markdowm: 
-            <%= article.markdown %>
-        </div>
-    </div>
 </body>
 
 </html>

@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const slugify = require('slugify')
 
 
+
 const articleSchema = new mongoose.Schema({
     title:{
         type:String,
@@ -22,6 +23,10 @@ const articleSchema = new mongoose.Schema({
         type:String,
         required:true,
         unique:true
+    },
+    createdBy:{
+        type:String,
+        // default : 
     }
 })
 
@@ -36,6 +41,8 @@ articleSchema.pre('validate' , function(next){
     }
     next()
 })
+
+
 
 
 module.exports = mongoose.model('Article' , articleSchema)
