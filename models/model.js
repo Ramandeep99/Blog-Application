@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
 const validator = require('validator');
+const Schema = mongoose.Schema
 
 const detailSchema = new mongoose.Schema({
     name:{
@@ -19,7 +20,10 @@ const detailSchema = new mongoose.Schema({
         type:String,
         required: [true , "Please enter a password"],
         minlength :[4,"Minimum password length is 4 characters"]
-    }    
+    },
+    followers:[{type: Schema.Types.ObjectId , ref:'Detail'}],
+    following:[{type: Schema.Types.ObjectId , ref:'Detail'}],
+    bookmarks:[{type: Schema.Types.ObjectId , ref:'Article'}],
 })
 
 detailSchema.pre("save" , async function(next){

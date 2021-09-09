@@ -1,0 +1,219 @@
+<%- include('../partials/header', {fileName: '/css/navbar.css' , fileName2: '/css/profile.css' }); %>
+
+
+    <body>
+        <%- include("../partials/navbar") %>
+
+            <!-- profile div -->
+            <div class="container-fluid">
+                <div class="col-xl-10 col-lg-10 col-md-11 col-11 mx-auto my-5">
+                    <div class=" right_div__post  shadow mb-lg-md-5 mb-sm-0">
+                        
+                        <div class="right_sub__div ">
+                            <div class="profile_img mb-4"><i class="fas fa-portrait" id="photo-icon"></i>
+                            </div>
+                            <div class="profile_main">
+                                <p><%= user.name %></p>
+                            </div>
+                            <div class="follow-follower mt-4">
+                                <p>Posts <strong class="mx-2"><%= totalPosts.length %></strong></p>
+                                <p>Follower <strong class="mx-2"> <%= user.followers.length %></strong></p>
+                                <p>Following <strong class="mx-2"> <%= user.following.length %></strong> </p>
+                            </div>
+                            <div class="new_blog mt-4">
+                                <a type="button" class="btn btn-secondary" href="/articles/new">Create New </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- posts by user -->
+                <% articles.forEach(article=> { %>
+                    <% if( (article.createdBy.email)===(user.email) ) { %>
+
+                        <div class="col-lg-8 col-md-11 col-11 mx-auto">
+                            <div class="row gy-5">
+                                <!-- first blog -->
+                                <div class="col-12 card shadow p-4 blog_left__div mb-5">
+                                    <div class="d-flex justify-content-center align-items-center flex-column pt-3 pb-5">
+                                        <h1>
+                                            <%= article.title %>
+                                        </h1>
+                                        <p class="blog_title">created On: <span class="font-weight-bold">
+                                                <%= article.createdAt.toLocaleDateString() %>
+                                            </span> </p>
+                                    </div>
+                                    <figure class="right_side__img mb-5">
+                                        <img src="/uploads/<%= article.image %>" class="img-fluid shadow" alt="">
+                                    </figure>
+                                    <p>
+                                        <%= article.description %>
+                                    </p>
+                                    <p>
+                                        <%= article.markdown %>
+                                    </p>
+                                    <div class="d-flex justify-content-between left_div_btns">
+                                        <div>
+
+                                            <button class="left_div__edit"><a class="left_div__edit" href="/articles/edit/<%= article.id %>" 
+                                                id="edit_btn">Edit</a></button>
+
+                                        </div>
+                                        
+                                        <div>
+
+                                            <form class="d-inline delete-btn"
+                                                action="/articles/<%= article.id %>?_method=DELETE" method="POST">
+                                                <button type="submit" class="left_div__delete" id="delete_btn">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- <form class="replies" id="form">
+
+                                        <div class="form-group mt-4">
+
+                                            <input required value="" type="text" name="comment" id="comment"
+                                                class="form-control comment" placeholder="Your Comment">
+                                        </div>
+                                        <div id="postId" style="display: none;"><%= article.id %></div>
+                                        <div class="form-group mt-4">
+                                            <button class="btn btn-primary btn-block" type="submit" value="Submit"
+                                                id="submit-btn" data-post-id="<%= article.id %>">Submit</button>
+                                        </div>
+                                    </form> -->
+                                </div>
+
+                            </div>
+                        </div>
+                        <% } %>
+                            <% }) %>
+
+            </div>
+
+
+            
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+            integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+            crossorigin="anonymous"></script>
+        <script type="text/javascript">
+
+            // comments logic
+
+            // show and hide the replies
+            // const reply = (res) => {
+            //     console.log('hi');
+            //     // debugger;
+            //     var res = document.getElementById(res);
+            //     console.log(res.className);
+            //     if (res.className == "replies") {
+            //         res.className = "thapa_show";
+            //         res.style.WebkitTransition = 'all 0.3s ease';
+            //         // res.style.transition = 'all 0.3s ease';
+            //         // console.log(thapa_show);
+            //     } else if (res.className == 'thapa_show') {
+            //         // res.className = " ";
+            //         console.log('thapa show');
+            //         res.className = "replies";
+            //     }
+            // }
+
+
+
+            const formFields = document.getElementById('form');
+            
+            formFields.addEventListener('submit', async (e) => {
+                // e.preventDefault();
+
+                const postId = document.getElementById("postId").innerText
+
+                const data = formFields.comment.value;
+
+                console.log(postId)
+                // console.log(data)
+                try {
+                    const commented = await fetch(`/articles/comment/${postId}`, {
+
+                        method: 'PUT',
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ data }),
+                    })
+                    console.log(commented.json())
+                }
+                catch (err) {
+                    console.log('err')
+                }
+            });
+
+
+
+
+           
+
+
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- <%- include("../partials/navbar") %>
+        <div class="container">
+            <h1 class="mb-4 mt-2">Blog Article</h1>
+            <a href="/articles/new" class="btn btn-success">New Article</a>
+
+            <% articles.forEach(article=> { %>
+                <% if( (article.createdBy)===(user.email) ) { %>
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <%= article.title %>
+                            </h4>
+                        </div>
+                        <div class="card-subtitle text-muted mb-2">
+                            <%= article.createdAt.toLocaleDateString() %>
+                        </div>
+                        <div class="card-text mb-2">
+                            <%= article.description %> <br>
+                                <a href="/articles/<%= article.slug %>" class="btn btn-primary">Read More</a>
+
+
+                                <a href="/articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
+
+                                <form class="d-inline delete-btn" action="/articles/<%= article.id %>?_method=DELETE"
+                                    method="POST">
+                                    <button type="submit" class="btn btn-danger">
+                                        Delete
+                                    </button>
+                                </form>
+
+                        </div>
+                    </div>
+                    <% } else { %>
+                        <div></div>
+                        <% } %>
+                            <% }) %>
+        </div> -->
+    </body>
+
+    </html>

@@ -1,0 +1,316 @@
+<%- include('../partials/header', {fileName: '/css/navbar.css' , fileName2: '/css/profile.css' }) %>
+
+
+    <body>
+        <!-- <%- include("../partials/navbar") %> -->
+        
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark" id="nav">
+    <a class="navbar-brand logo" href="#" id="logo">GO BLOG</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/home" id="home" >Home</a>
+        </li>
+        <%  if(user) { %>
+          
+          <li class="nav-item" >
+            <a class="nav-link text-light" href="./../../login_signup/profile" id="username" > Welcome, <%= user.name  %> </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="./../../login_signup/logout" id="logout">Log out</a>
+          </li>
+        <%  } else { %>
+          
+          <li class="nav-item">
+            <a class="nav-link text-light" href="./../../login_signup/login" id="login">Log in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="./../../login_signup/register" id="signup">Sign up</a>
+          </li> 
+        <% } %>   
+        
+      </ul>
+    </div>  
+  </nav>
+  <br>
+  
+
+            <!-- profile div -->
+            <div class="container-fluid">
+                <div class="col-xl-10 col-lg-10 col-md-11 col-11 mx-auto my-5">
+                    <div class=" right_div__post  shadow mb-lg-md-5 mb-sm-0">
+
+                        <div class="right_sub__div ">
+                            <div class="profile_img mb-4"><i class="fas fa-portrait" id="photo-icon"></i>
+                            </div>
+                            <div class="profile_main">
+                                <p>
+                                    <%= otherUser.name %>
+                                </p>
+                            </div>
+                            <div class="follow-follower mt-4">
+                                <p>Posts <strong class="mx-2">0</strong></p>
+                                <p>Follower <strong class="mx-2"><%= otherUser.followers.length %> </strong></p>
+                                <p>Following <strong class="mx-2"> <%= otherUser.following.length %> </strong> </p>
+                            </div>
+                            <% if( (otherUser.email)===(user.email) ) { %>
+                                <div class="new_blog mt-4">
+                                    <a type="button" class="btn btn-secondary" href="/articles/new">Create New </a>
+                                </div>
+
+                                <% } else { %>
+                            <% if(otherUser.followers.includes(user._id)) { %>
+                            <div class="new_blog mt-4">
+                                <a type="button" class="btn btn-secondary" onclick="follow_func(event)"
+                                    data-post-id="<%= otherUser._id %>" id="follow_btn"> Unfollow </a>
+                            </div>
+                            <% } else { %>
+                                <div class="new_blog mt-4">
+                                    <a type="button" class="btn btn-secondary" onclick="follow_func(event)"
+                                        data-post-id="<%= otherUser._id %>" id="follow_btn"> Follow </a>
+                                </div>
+                            <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- posts by user -->
+                <% articles.forEach(article=> { %>
+                    <% if( (article.createdBy.email)===(user.email) ) { %>
+
+                        <div class="col-lg-8 col-md-11 col-11 mx-auto">
+                            <div class="row gy-5">
+
+                                <div class="col-12 card shadow p-4 blog_left__div mb-5">
+                                    <div class="d-flex justify-content-center align-items-center flex-column pt-3 pb-5">
+                                        <h1>
+                                            <%= article.title %>
+                                        </h1>
+                                        <p class="blog_title">created On: <span class="font-weight-bold">
+                                                <%= article.createdAt.toLocaleDateString() %>
+                                            </span> </p>
+                                    </div>
+                                    <figure class="right_side__img mb-5">
+                                        <img src="/uploads/<%= article.image %>" class="img-fluid shadow" alt="">
+                                    </figure>
+                                    <p>
+                                        <%= article.description %>
+                                    </p>
+                                    <p>
+                                        <%= article.markdown %>
+                                    </p>
+                                    <div class="d-flex justify-content-between left_div_btns">
+                                        <div>
+                                            <button class="left_div__like" id="like_btn">
+                                                Edit
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button class="left_div__save" id="save_btn">
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <% } else { %>
+                            <div class="col-lg-8 col-md-11 col-11 mx-auto">
+                                <div class="row gy-5">
+                                    <div class="col-12 card shadow p-4 blog_left__div mb-5">
+                                        <div
+                                            class="d-flex justify-content-center align-items-center flex-column pt-3 pb-5">
+                                            <h1>
+                                                <%= article.title %>
+                                            </h1>
+                                            <p class="blog_title">created On: <span class="font-weight-bold">
+                                                    <%= article.createdAt.toLocaleDateString() %>
+                                                </span> </p>
+                                        </div>
+                                        <figure class="right_side__img mb-5">
+                                            <img src="/uploads/<%= article.image %>" class="img-fluid shadow" alt="">
+                                        </figure>
+                                        <p>
+                                            <%= article.description %>
+                                        </p>
+                                        <p>
+                                            <%= article.markdown %>
+                                        </p>
+                                        <div class="d-flex justify-content-between left_div_btns">
+                                            <div>
+                                                <button class="left_div__like" id="like_btn">
+                                                    <i class="far fa-thumbs-up"></i> Like
+                                                </button>
+                                            </div>
+                                            <div>
+                                                <button class="left_div__save" id="save_btn">
+                                                    <i class="far fa-bookmark"></i> Save
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <% } %>
+                                <% }) %>
+
+            </div>
+
+
+
+            <!-- JS  -->
+
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+                integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+                crossorigin="anonymous"></script>
+            <script type="text/javascript">
+
+
+                // for follower-following
+                const follow = document.getElementById('follow_btn');
+
+                var toggleButtonText = {
+                    Follow: function (button) {
+                        button.textContent = "Unfollow";
+                    },
+                    Unfollow: function (button) {
+                        button.textContent = "Follow";
+                    }
+                };
+
+
+                const follow_func = async (e) => {
+
+                    // e.preventDefault();
+
+                    var postId = event.target.dataset.postId;
+
+                    var action = event.target.textContent.trim();
+                    // console.log(action)
+                    toggleButtonText[action](event.target);
+
+                    try {
+                        const followUser = await fetch(`/login_signup/follow/${postId}`, {
+
+                            method: 'PUT',
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        });
+
+                        const url = await followUser.url
+                        // console.log(data.status)
+                        location.reload(url);
+
+                    }
+                    catch (err) {
+                        console.log(err)
+                    }
+                };
+
+                // for like btn
+                
+
+                
+                // var updatePostStats = {
+                //     Like: function (postId) {
+                //         document.querySelector('#likes-count-' + postId).textContent++;
+                //     },
+                //     Unlike: function (postId) {
+                //         document.querySelector('#likes-count-' + postId).textContent--;
+                //     }
+                // };
+
+                // const like_func = async (e) => {
+                //     e.preventDefault();
+                //     var postId = event.target.dataset.postId;
+
+                //     var action = event.target.textContent.trim();
+                //     // console.log(action)
+                //     toggleButtonText[action](event.target);
+                //     updatePostStats[action](postId);
+
+                //     try {
+                //         const liked = await fetch(`/articles/like/${postId}`, {
+
+                //             method: 'PUT',
+                //             headers: {
+                //                 "Content-Type": "application/json",
+                //             }
+                //         })
+                //         console.log(liked.json())
+                //     }
+                //     catch (err) {
+                //         console.log('err')
+                //     }
+                // };
+
+
+            </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+             <% - include("../partials/navbar") %>
+                <div class="container">
+                    <h1 class="mb-4 mt-2">Blog Article</h1>
+                    <a href="/articles/new" class="btn btn-success">New Article</a>
+
+                    <% articles.forEach(article=> { %>
+                        <% if( (article.createdBy)===(user.email) ) { %>
+                            <div class="card mt-4">
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <%= article.title %>
+                                    </h4>
+                                </div>
+                                <div class="card-subtitle text-muted mb-2">
+                                    <%= article.createdAt.toLocaleDateString() %>
+                                </div>
+                                <div class="card-text mb-2">
+                                    <%= article.description %> <br>
+                                        <a href="/articles/<%= article.slug %>" class="btn btn-primary">Read More</a>
+
+
+                                        <a href="/articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
+
+                                        <form class="d-inline delete-btn"
+                                            action="/articles/<%= article.id %>?_method=DELETE" method="POST">
+                                            <button type="submit" class="btn btn-danger">
+                                                Delete
+                                            </button>
+                                        </form>
+
+                                </div>
+                            </div>
+                            <% } else { %>
+                                <div></div>
+                                <% } %>
+                                    <% }) %>
+                </div> -->
+    </body>
+
+    </html>

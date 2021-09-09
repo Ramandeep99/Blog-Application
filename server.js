@@ -7,10 +7,12 @@ const path = require('path')
 const Details = require('./models/model');
 const userRouter = require('./routes/login_signup')
 const articleRouter = require('./routes/articles')
+const otherUser = require('./routes/user')
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const { json } = require('express');
 const {requireAuth , currentUser} = require('./middleware/login_signup_mw');
+const logger = require('morgan')
 const port = 2000;
 
 // console.log(__dirname)
@@ -26,6 +28,7 @@ app.use(express.urlencoded({extended:false}))
 app.use(methodOverride('_method'))
 app.use(express.static('public'))
 app.use(cookieParser())
+// app.use(logger('combined'));
 app.use(json())
 
 
@@ -48,5 +51,6 @@ app.get('/home' , requireAuth ,  async (req,res) =>{
 
 app.use('/login_signup',userRouter)
 app.use('/articles',articleRouter)
+app.use('/user',otherUser)
 
-app.listen(port);
+app.listen(port);  

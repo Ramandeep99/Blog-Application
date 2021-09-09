@@ -1,48 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('../partials/header', {fileName: '/css/navbar.css' , fileName2: '/css/new.css' }); %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
+    <body>
+        <%- include("../partials/navbar") %>
 
-<body>
-    <%- include("../partials/navbar") %>
-    <div class="container">
-        <h1 class="mb-4 mt-2">New Article</h1>
+            <div class="container-fluid">
+                <!-- to get space from sides -->
+                <div class="col-xl-6 col-lg-6 col-md-11 col-11 mx-auto mt-2 text-center">
 
-        <form action="/articles" method="POST">
-            <!-- <%- include("../partials/_form_fields") %> -->
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input required value="<%= article.title %>" type="text" name="title" id="title" class="form-control">
+                    <h1 class="mb-4 mt-2 new_blog">New Article</h1>
+                    <div class="new_blog my-3 ">
+                        <!-- <a type="button" class="btn btn-secondary btns" href="#">Select Category</a> -->
+                        <div class="btn-group">
+                            <!-- <button type="button" class="btn btn-secondary btns">Select Category</button>
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button> -->
+                            <!-- <ul class="dropdown-menu" role="menu">
+                                <li><a href="#" class="btns">Sports</a></li>
+                                <li><a href="#" class="btns">Smartphones</a></li>
+                                <li><a href="#" class="btns">Music</a></li>
+                            </ul> -->
+                            <input required class="btn btns" list="browsers" placeholder="Select Category">
+                            <datalist id="browsers">
+                                <option value="Internet Explorer">
+                                <option value="Firefox">
+                                <option value="Chrome">
+                                <option value="Opera">
+                                <option value="Safari">
+                            </datalist>
 
+
+                        </div>
+                    </div>
+                    <form action="/articles" method="POST" enctype="multipart/form-data">
+                        <!-- <%- include("../partials/_form_fields") %> -->
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input required value="<%= article.title %>" type="text" name="title" id="title"
+                                class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea required value="<%= article.description %>" name="description" id="description"
+                                class="form-control"></textarea>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="markdown">Markdown</label>
+                            <textarea required value="<%= article.markdown %>" name="markdown" id="markdown"
+                                class="form-control"></textarea>
+                        </div>
+
+                        <!-- image upload -->
+
+                        <div class="form-group mb-4 text-center">
+                            <label for="image">Upload Image</label>
+                            <input required type='file' name="file" id="image" class="form-control">
+                        </div>
+
+                        <a href="/home" class="btn btn-primary btns mx-5">Cancel</a>
+                        <button class="btn btn-primary btns" type="submit">Save</button>
+                    </form>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea required value="<%= article.description %>" name="description" id="description"
-                    class="form-control"></textarea>
+    </body>
 
-            </div>
-
-            <div class="form-group">
-                <label for="markdown">Markdown</label>
-                <textarea required value="<%= article.markdown %>" name="markdown" id="markdown"
-                    class="form-control"></textarea>
-            </div>
-
-            <a href="/home" class="btn btn-secondary">Cancel</a>
-            <button class="btn btn-primary" type="submit">Save</button>
-        </form>
-    </div>
-</body>
-
-</html>
+    </html>

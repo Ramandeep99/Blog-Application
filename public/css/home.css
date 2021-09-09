@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=David+Libre&family=Josefin+Sans&display=swap');
+
+:root {
+    --bg-size: 100% 100%;
+    --main_color: #fff;
+    --title: 'Josefin Sans', sans-serif;
+    --font-para: 'David Libre', serif;
+    --btn-color: #bbe1fa;
+    --btn-font-color: #000;
+    --btn-font: 1.5rem;
+    --eff: .3s all ease;
+}
+
+* {
+    font-family: var(--font-para);
+}
+
+html {
+    font-size: 62.5%;
+}
+
+
+p,
+a,
+label,
+span,
+input::placeholder {
+    font-size: 1.9rem;
+    line-height: 170%;
+    color: #6c757d;
+}
+
+figure img,
+.fab,
+.fas {
+    transition: var(--eff);
+}
+
+
+a,
+a:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+body {
+    background: hsl(84, 3%, 94%);
+}
+
+
+
+/*left side vblog stykle start*/
+
+
+figure img:hover,
+.left_div__save:hover,
+.left_div__like:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 1rem 3rem -1rem rgba(255, 255, 255, 0.7);
+}
+
+
+.blog_left__div h1 {
+    font-family: var(--title);
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.blog_left__div h1,p:hover {
+    cursor: pointer;
+}
+
+.blog_left__div .blog_title {
+    font-weight: 400;
+    font-size: 2.2rem;
+}
+
+.blog_left__div .blog_title span {
+    color: #1b262c;
+}
+
+.blog_left__div p {
+    color: #333d46;
+    white-space: nowrap; 
+    /* width: 50px;  */
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    /* border: 1px solid #000000; */
+}
+
+.left_div_btns {
+    margin-top: 3rem;
+    transition: var(--eff);
+}
+
+.left_div__like {
+    color: var(--btn-font-color);
+    /*border-width: .2rem;*/
+    font-size: var(--btn-font);
+    transition: var(--eff);
+    padding: .8rem 2rem;
+    background-color: var(--btn-color);
+    border-color: var(--btn-color);
+    font-family: var(--title);
+    outline: none;
+    border: none;
+}
+
+span{
+    color: black
+}
+
+.left_div__save {
+    color: var(--btn-font-color);
+    /*border-width: .2rem;*/
+    font-size: var(--btn-font);
+    transition: var(--eff);
+    padding: .8rem 2rem;
+    background-color: var(--btn-color);
+    border-color: var(--btn-color);
+    font-family: var(--title);
+    outline: none;
+    border: none;
+}
+
+/* right div  */
+
+.right_div__title {
+    background: #d0cecf;
+    box-shadow: 0 1rem 3rem -1rem rgba(255, 255, 255, 0.7);
+}
+
+.right_div__title h2 {
+    font-size: 3rem;
+    padding-left: 2rem;
+    display: block;
+}
+
+
+.right_sub__div {
+    background: #fff;
+    padding: 2.5rem 1rem;
+}
+
+/* .right_sub__div .row {
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+} */
+
+/* .right_sub__div .row:last-child {
+    margin-bottom: 0;
+} */
+
+/* .row>.right_div__post {
+    padding-left: 0;
+    padding-right: 0;
+} */
+
+
+/*tags style*/
+.tags_main {
+    display: flex;
+    flex-wrap: wrap;
+    /* display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(4rem, 8rem)); */
+    /* flex: 1 1 0; */
+    grid-gap: 1rem;
+}
+
+.tags_main{
+    flex: 1 1 0;   
+}
+
+.tags_main a {
+    font-size: 2rem;
+    line-height: 170%;
+    font-weight: lighter;
+    background: #6c757d;
+    color: white;
+    transition: var(--eff);
+}
+
+.tags_main a:hover {
+    color: var(--btn-font-color);
+    background: var(--btn-color);
+}
+
+
+
+
+.profile_main p,a{
+    font-size:  2.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.follow-follower{
+    grid-gap: 1rem;
+}
+
+.follow-follower p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.7rem;
+
+}
+
+.profile_img{
+    font-size: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+
+/* to make right side sticky */
+/* .stick_btm{
+position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  padding: 5px;
+} */
+/* responsive */
+
+
+/*responsive code start*/
+/* @media(max-width:998px) {
+    html {
+        font-size: 60%;
+    }
+
+    .left_div_blog {
+        margin: 3rem 0;
+    }
+
+    p,
+    label,
+    input::placeholder {
+        font-size: 2.2rem;
+    }
+
+    :root {
+        --btn-font: 2rem;
+    }
+
+    .main_header h2 {
+        font-size: 4.5rem;
+    }
+
+}
+
+@media(max-width:768px) {
+    html {
+        font-size: 45%;
+    }
+
+    .left_div_blog {
+        margin: 3rem 0;
+    }
+
+} */
+

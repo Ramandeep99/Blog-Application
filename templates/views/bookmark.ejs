@@ -1,0 +1,135 @@
+<%- include('../partials/header', {fileName: '/css/navbar.css' , fileName2: '/css/profile.css' }); %>
+
+
+    <body>
+        <%- include("../partials/navbar") %>
+
+            <!-- profile div -->
+            <div class="container-fluid">
+                <div class="col-xl-10 col-lg-10 col-md-11 col-11 mx-auto my-5">
+                    <div class=" right_div__post  shadow mb-lg-md-5 mb-sm-0">
+                        <!-- <div class="right_div__title  shadow py-4 pl-2 ">
+                            <h2>Profile</h2>
+                        </div> -->
+                        <div class="right_sub__div ">
+                            <div class="profile_img mb-4"><i class="fas fa-portrait" id="photo-icon"></i>
+                            </div>
+                            <div class="profile_main">
+                                <p>
+                                    <%= user.name %>
+                                </p>
+                            </div>
+                            <div class="follow-follower mt-4">
+                                <p>Posts <strong class="mx-2">0</strong></p>
+                                <p>Follower <strong class="mx-2"> 10</strong></p>
+                                <p>Following <strong class="mx-2"> 03</strong> </p>
+                            </div>
+                            <div class="new_blog mt-4">
+                                <a type="button" class="btn btn-secondary" href="/articles/new">Create New </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- posts by user -->
+                <% user.bookmarks.forEach( savedId=> { %>
+
+                    <% articles.forEach(article=> { %>
+
+                        <% if( (article._id).equals(savedId) ) { %>
+
+                            <% if( (article.createdBy.email)===(user.email) ) { %>
+
+                                <div class="col-lg-8 col-md-11 col-11 mx-auto">
+                                    <div class="row gy-5">
+                                        <!-- first blog -->
+                                        <div class="col-12 card shadow p-4 blog_left__div mb-5">
+                                            <div
+                                                class="d-flex justify-content-center align-items-center flex-column pt-3 pb-5">
+                                                <h1>
+                                                    <%= article.title %>
+                                                </h1>
+                                                <p class="blog_title">created On: <span class="font-weight-bold">
+                                                        <%= article.createdAt.toLocaleDateString() %>
+                                                    </span> </p>
+                                            </div>
+                                            <figure class="right_side__img mb-5">
+                                                <img src="/uploads/<%= article.image %>" class="img-fluid shadow"
+                                                    alt="">
+                                            </figure>
+                                            <p>
+                                                <%= article.description %>
+                                            </p>
+                                            <p>
+                                                <%= article.markdown %>
+                                            </p>
+                                            <div class="d-flex justify-content-between left_div_btns">
+                                                <div>
+                                                    <button class="left_div__like" id="like_btn">
+                                                        <!-- <i class="far fa-thumbs-up"></i> -->
+                                                        Edit
+                                                    </button>
+                                                </div>
+                                                <div>
+                                                    <button class="left_div__save" id="save_btn">
+                                                        <!-- <i class="far fa-bookmark"></i>  -->
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <% } else { %>
+                                    <div class="col-lg-8 col-md-11 col-11 mx-auto">
+                                        <div class="row gy-5">
+                                            <!-- first blog -->
+                                            <div class="col-12 card shadow p-4 blog_left__div mb-5">
+                                                <div
+                                                    class="d-flex justify-content-center align-items-center flex-column pt-3 pb-5">
+                                                    <h1>
+                                                        <%= article.title %>
+                                                    </h1>
+                                                    <p class="blog_title">created On: <span class="font-weight-bold">
+                                                            <%= article.createdAt.toLocaleDateString() %>
+                                                        </span> </p>
+                                                </div>
+                                                <figure class="right_side__img mb-5">
+                                                    <img src="/uploads/<%= article.image %>" class="img-fluid shadow"
+                                                        alt="">
+                                                </figure>
+                                                <p>
+                                                    <%= article.description %>
+                                                </p>
+                                                <p>
+                                                    <%= article.markdown %>
+                                                </p>
+                                                <div class="d-flex justify-content-between left_div_btns">
+                                                    <div>
+                                                        <button class="left_div__like" id="like_btn">
+                                                            <!-- <i class="far fa-thumbs-up"></i> -->
+                                                            Like
+                                                        </button>
+                                                    </div>
+                                                    <div>
+                                                        <button class="left_div__save" id="save_btn">
+                                                            <!-- <i class="far fa-bookmark"></i>  -->
+                                                            Save
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <% } %>
+                                        <% } %>
+                                            <% }) %>
+                                                <% }) %>
+
+            </div>
+
+    </body>
+
+    </html>

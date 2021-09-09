@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=David+Libre&family=Josefin+Sans&display=swap');
+
+:root {
+    --bg-size: 100% 100%;
+    --main_color: #fff;
+    --title: 'Josefin Sans', sans-serif;
+    --font-para: 'David Libre', serif;
+    --btn-color: #bbe1fa;
+    --btn-font-color: #000;
+    --btn-font: 1.5rem;
+    --eff: .3s all ease;
+}
+
+* {
+    font-family: var(--font-para);
+}
+
+html {
+    font-size: 62.5%;
+}
+
+
+p,
+span,
+.comment,
+label,
+input::placeholder {
+    font-size: 1.9rem;
+    line-height: 170%;
+    color: #6c757d;
+}
+
+#submit-btn {
+    font-size: 1.9rem;
+    line-height: 170%;
+}
+
+figure img,
+.fab,
+.fas {
+    transition: var(--eff);
+}
+
+
+a,
+a:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+body {
+    background: hsl(84, 3%, 94%);
+}
+
+
+
+/*left side vblog stykle start*/
+
+
+figure img:hover,
+.left_div__save:hover,
+.left_div__like:hover,
+.left_div__comment:hover,
+.left_div__edit:hover,
+.left_div__delete:hover,
+#edit_btn {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 1rem 3rem -1rem rgba(255, 255, 255, 0.7);
+}
+
+
+.blog_left__div h1 {
+    font-family: var(--title);
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.blog_left__div .blog_title {
+    font-weight: 400;
+    font-size: 2.2rem;
+}
+
+.blog_left__div .blog_title span {
+    color: #1b262c;
+}
+
+.blog_left__div p {
+    color: #333d46;
+    /* white-space: nowrap;  */
+    /* width: 50px;  */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis;  */
+    /* border: 1px solid #000000; */
+}
+
+.left_div_btns {
+    margin-top: 3rem;
+    transition: var(--eff);
+}
+
+.left_div__like {
+    color: var(--btn-font-color);
+    /*border-width: .2rem;*/
+    font-size: var(--btn-font);
+    transition: var(--eff);
+    padding: .8rem 2rem;
+    background-color: var(--btn-color);
+    border-color: var(--btn-color);
+    font-family: var(--title);
+    outline: none;
+    border: none;
+}
+
+.left_div__comment {
+    color: var(--btn-font-color);
+    /*border-width: .2rem;*/
+    font-size: var(--btn-font);
+    transition: var(--eff);
+    padding: .8rem 2rem;
+    background-color: var(--btn-color);
+    border-color: var(--btn-color);
+    font-family: var(--title);
+    outline: none;
+    border: none;
+}
+
+.left_div__save {
+    color: var(--btn-font-color);
+    /*border-width: .2rem;*/
+    font-size: var(--btn-font);
+    transition: var(--eff);
+    padding: .8rem 2rem;
+    background-color: var(--btn-color);
+    border-color: var(--btn-color);
+    font-family: var(--title);
+    outline: none;
+    border: none;
+}
+
+.left_div__delete {
+    color: var(--btn-font-color);
+    /*border-width: .2rem;*/
+    font-size: var(--btn-font);
+    transition: var(--eff);
+    padding: .8rem 2rem;
+    background-color: var(--btn-color);
+    border-color: var(--btn-color);
+    font-family: var(--title);
+    outline: none;
+    border: none;
+}
+
+.left_div__edit {
+    color: var(--btn-font-color);
+    /*border-width: .2rem;*/
+    font-size: var(--btn-font);
+    transition: var(--eff);
+    padding: .8rem 1.5rem;
+    background-color: var(--btn-color);
+    border-color: var(--btn-color);
+    font-family: var(--title);
+    outline: none;
+    border: none;
+}
+
+#edit_btn:hover{
+    color: black;
+}
+
+figure img{
+    max-width: 500px;
+    max-height: 300px;
+}
+
+
+figure{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+span{
+    color: black
+}
+
+/* comments */
+
+.replies{
+    margin-top: 2rem;
+    transition: var(--eff);
+    padding: 1rem 0;
+}
+
+.thapa_show {
+    margin: 20px 0;
+    transition: var(--eff);
+    display: block;
+}
+
+textarea{
+    border: none;
+}

@@ -1,43 +1,335 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('../partials/header', {fileName: '/css/navbar.css' , fileName2: '/css/show.css' }); %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
 
-<body>
-    <%- include("../partials/navbar") %>
-        <div class="container">
-            <h1 class="mb-4 mt-2">
-                <%= article.title %>
-            </h1>
-            <div class="text-muted mb-2">
-                <%= article.createdAt.toLocaleDateString() %>
-            </div>
-            <a href="/home" class="btn btn-secondary">All Articles</a>
+    <body>
+        <%- include("../partials/navbar") %>
 
-            <% if( (article.createdBy)===(user.email) ) { %>
-                <a href="edit/<%= article.id %>" class="btn btn-secondary">Edit</a>
-                <% } else { %>
-                    <div></div>
-                    <% } %>
-                        <div>
-                            Description:
-                            <%= article.description %>
+            <% if(article.image) { %>
+
+                <img src="./uploads/article.image %>" alt="">
+                <% } %>
+                    <div class="container-fluid">
+
+                        <div class="col-xl-10 col-lg-10 col-md-11 col-11 mx-auto my-5">
+                            <div class="col-12 card shadow p-4 blog_left__div mb-5">
+                                <div class="d-flex justify-content-center align-items-center flex-column pt-3 pb-5">
+                                    <h1>
+                                        <%= article.title %>
+                                    </h1>
+
+                                    <p class="blog_title">Created On: <span class="font-weight-bold">
+                                            <%= article.createdAt.toLocaleDateString() %>
+                                        </span> </p>
+                                    <p class="blog_title">Created By: <span class="font-weight-bold">
+                                            <%= article.createdBy.name %>
+                                        </span> </p>
+                                </div>
+                                <figure class="right_side__img mb-5">
+                                    <img src="/uploads/<%= article.image %>" class="img-fluid shadow"
+                                        style="height: auto; width: auto;" alt="">
+                                </figure>
+                                <p>
+                                    <%= article.description %>
+                                </p>
+                                <p>
+                                    <%= article.markdown %>
+                                </p>
+
+                                <% if( (article.createdBy.email)===(user.email)) { %>
+                                    <div class="d-flex justify-content-between left_div_btns">
+                                        <div>
+
+                                            <button class="left_div__edit"><a class="left_div__edit"
+                                                    href="/articles/edit/<%= article.id %>"
+                                                    id="edit_btn">Edit</a></button>
+
+                                        </div>
+                                        <!-- <div>
+                                            <button class="left_div__comment" id="comment_btn">
+                                                Add a Comment..
+                                            </button>
+                                        </div> -->
+                                        <!-- <div>
+                                            <button class="left_div__comment" id="comment_btn"
+                                                data-post-id="<%= article.id %>" onclick="comment_func(event)"> Add a
+                                                Comment..</button>
+                                        </div> -->
+
+
+                                        <div>
+
+                                            <form class="d-inline delete-btn"
+                                                action="/articles/<%= article.id %>?_method=DELETE" method="POST">
+                                                <button type="submit" class="left_div__delete" id="delete_btn">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- <form class="replies pt-3" id="like_form">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Your Comment" class="form-control"
+                                                name="comment">
+                                        </div>
+                                        <div class="d-flex justify-content-center mt-4 form-group">
+                                            <button type="submit" data-post-id="<%= article.id %>"
+                                                class="left_div__comment" id="comment_btn">
+                                                Add
+                                            </button>
+                                        </div>
+                                    </form> -->
+
+
+                                    <% } else { %>
+                                        <div class="d-flex justify-content-between left_div_btns">
+
+                                            <% if(article.likes.includes(user._id)) { %>
+                                                <div>
+                                                    <button onclick="like_func(event);" data-post-id="<%= article.id %>"
+                                                        class="left_div__like" id="like_btn">
+                                                        Unlike
+                                                    </button>
+                                                    <span id="likes-count-<%= article.id %>">
+                                                        <%= article.likes.length %>
+                                                    </span>
+                                                </div>
+                                                <% } else { %>
+                                                    <div>
+                                                        <button onclick="like_func(event);"
+                                                            data-post-id="<%= article.id %>" class="left_div__like"
+                                                            id="like_btn">
+                                                            Like
+                                                        </button>
+                                                        <span id="likes-count-<%= article.id %>">
+                                                            <%= article.likes.length %>
+                                                        </span>
+                                                    </div>
+                                                    <% } %>
+
+                                                        <% if(user.bookmarks.includes(article._id)) { %>
+                                                            <div>
+                                                                <!-- <button class="left_div__save" id="save_btn">
+                                                                    <i class="far fa-bookmark"></i> Unsave
+                                                                </button> -->
+                                                                <button onclick="save_func(event);"
+                                                                    data-post-id="<%= article.id %>"
+                                                                    class="left_div__save" id="save_btn">
+                                                                    Unsave
+                                                                </button>
+                                                            </div>
+                                                            <% } else { %>
+                                                                <div>
+                                                                    <button onclick="save_func(event);"
+                                                                        data-post-id="<%= article.id %>"
+                                                                        class="left_div__save" id="save_btn">
+                                                                        Save
+                                                                    </button>
+                                                                </div>
+                                                                <% } %>
+                                        </div>
+                                        <% } %>
+                                            <form class="replies" id="form">
+
+                                                <div class="form-group mt-4">
+
+                                                    <input required value="" type="text" name="comment" id="comment"
+                                                        class="form-control comment" placeholder="Your Comment">
+                                                </div>
+                                                <div id="postId" style="display: none;">
+                                                    <%= article.id %>
+                                                </div>
+                                                <div class="form-group mt-4">
+                                                    <button class="btn btn-primary btn-block" type="submit"
+                                                        value="Submit" id="submit-btn"
+                                                        data-post-id="<%= article.id %>">Submit</button>
+                                                </div>
+                                            </form>
+
+                                            <% article.comments.forEach(comment=> { %>
+                                            <div class="replies" id="reply1">
+                                                <div
+                                                    class="d-flex justify-content-start flex-row align-items-center card reply_card py-3 ">
+                                                    <div class=" reply_img mx-2 align-self-center ">
+                                                        <img
+                                                            src="https://img.icons8.com/doodle/48/000000/user-male-skin-type-5.png" />
+                                                    </div>
+                                                    <div class="reply_text__left">
+                                                        <p class="blog_title "> <span class="font-weight-bold"> Renu,
+                                                            </span> Sept 08, 2021, 12:00 PM </p>
+                                                        <p><%= comment.text %></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             <% }) %>
+                                                        
+                            </div>
+
                         </div>
-                        <div>
-                            Markdowm:
-                            <%= article.markdown %>
-                        </div>
-        </div>
-</body>
+                    </div>
 
-</html>
+                    <!-- JS  -->
+
+                    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                        crossorigin="anonymous"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+                        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+                        crossorigin="anonymous"></script>
+                    <script type="text/javascript">
+
+
+                        // to make comments visible
+
+
+
+
+                        // comments logic
+
+                        // show and hide the replies
+                        // const reply = (res) => {
+                        //     console.log('hi');
+                        //     // debugger;
+                        //     var res = document.getElementById(res);
+                        //     console.log(res.className);
+                        //     if (res.className == "replies") {
+                        //         res.className = "thapa_show";
+                        //         res.style.WebkitTransition = 'all 0.3s ease';
+                        //         // res.style.transition = 'all 0.3s ease';
+                        //         // console.log(thapa_show);
+                        //     } else if (res.className == 'thapa_show') {
+                        //         // res.className = " ";
+                        //         console.log('thapa show');
+                        //         res.className = "replies";
+                        //     }
+                        // }
+
+
+
+                        const formFields = document.getElementById('form');
+
+                        // console.log(formFields)
+                        formFields.addEventListener('submit', async (e) => {
+                            // e.preventDefault();
+
+                            const postId = document.getElementById("postId").innerText.trim()
+
+                            const data = formFields.comment.value;
+
+                            console.log(postId)
+                            console.log(data)
+                            try {
+                                const commented = await fetch(`/articles/comment/${postId}`, {
+
+                                    method: 'PUT',
+
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    },
+                                    body: JSON.stringify({ data }),
+                                })
+                                console.log(commented)
+                            }
+                            catch (err) {
+                                console.log('err')
+                            }
+                        });
+
+
+                        // for save btn               
+
+                        var toggleButtonTextSave = {
+                            Save: function (button) {
+                                button.textContent = "Unsave";
+                            },
+                            Unsave: function (button) {
+                                button.textContent = "Save";
+                            }
+                        };
+
+
+                        const save_func = async (e) => {
+
+                            e.preventDefault();
+                            var postId = event.target.dataset.postId;
+                            console.log(postId)
+
+                            // we can also implement that a post a alread saved in a user collection or not with action below
+                            var action = event.target.textContent.trim();
+
+                            toggleButtonTextSave[action](event.target);
+
+
+                            try {
+                                const saved = await fetch(`/login_signup/bookmark/${postId}`, {
+
+                                    method: 'PUT',
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    }
+                                })
+                                const data = await saved;
+                                console.log(data)
+                                // location.assign(data.url);
+                            }
+                            catch (err) {
+                                console.log(err)
+                            }
+                        };
+
+
+
+
+                        // for like btn
+                        const like = document.getElementById('like_btn');
+
+                        var toggleButtonText = {
+                            Like: function (button) {
+                                button.textContent = "Unlike";
+                            },
+                            Unlike: function (button) {
+                                button.textContent = "Like";
+                            }
+                        };
+
+                        var updatePostStats = {
+                            Like: function (postId) {
+                                document.querySelector('#likes-count-' + postId).textContent++;
+                            },
+                            Unlike: function (postId) {
+                                document.querySelector('#likes-count-' + postId).textContent--;
+                            }
+                        };
+
+                        const like_func = async (e) => {
+
+                            var postId = event.target.dataset.postId;
+
+                            var action = event.target.textContent.trim();
+                            toggleButtonText[action](event.target);
+                            updatePostStats[action](postId);
+
+                            e.preventDefault();
+
+                            try {
+                                const liked = await fetch(`/articles/like/${postId}`, {
+
+                                    method: 'PUT',
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    }
+                                })
+                                console.log(liked.json())
+                            }
+                            catch (err) {
+                                console.log('err')
+                            }
+                        };
+
+                    </script>
+
+    </body>
+
+    </html>

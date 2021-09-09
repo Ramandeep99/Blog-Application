@@ -1,0 +1,19 @@
+
+
+.form-div {
+    /* position: absolute; */
+    margin-top: 15vh;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 #000;
+}
+
+.main-div {
+    background: url();
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    background-size: 100%;
+
+}

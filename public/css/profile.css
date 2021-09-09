@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=David+Libre&family=Josefin+Sans&display=swap');
+
+:root {
+    --bg-size: 100% 100%;
+    --main_color: #fff;
+    --title: 'Josefin Sans', sans-serif;
+    --font-para: 'David Libre', serif;
+    --btn-color: #bbe1fa;
+    --btn-font-color: #000;
+    --btn-font: 1.5rem;
+    --eff: .3s all ease;
+}
+
+* {
+    font-family: var(--font-para);
+}
+
+html {
+    font-size: 62.5%;
+}
+
+
+p,
+label,
+span,
+.comment,
+a,
+input::placeholder {
+    font-size: 1.9rem;
+    line-height: 170%;
+    color: #6c757d;
+}
+
+#submit-btn {
+    font-size: 1.9rem;
+    line-height: 170%;
+}
+
+.fab,
+.fas {
+    transition: var(--eff);
+}
+
+
+a,
+a:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+body {
+    background: hsl(84, 3%, 94%);
+}
+
+
+
+/* right div  */
+
+.right_div__title { 
+    background: #fff;
+    box-shadow: 0 1rem 3rem -1rem rgba(255, 255, 255, 0.7);
+}
+
+.right_div__title h2 {
+    font-size: 3rem;
+    padding-left: 2rem;
+    display: flex;
+    justify-content: center;
+
+}
+
+
+.right_sub__div {
+    background: #fff;
+    padding: 2.5rem 1rem;
+}
+
+
+
+
+.profile_main p{
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.follow-follower{
+    grid-gap: 2rem;
+}
+
+.follow-follower{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.follow-follower p{
+    font-size: 2.7rem;
+}
+
+.profile_img{
+    font-size: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.new_blog a{
+    font-size: 2.7rem;
+}
+
+.new_blog{
+    display: flex;
+    justify-content: center;
+}
+
+
+/*  posts div */
+
+
+
+figure img:hover,
+.left_div__edit:hover,
+.left_div__delete:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 1rem 3rem -1rem rgba(255, 255, 255, 0.7);
+}
+
+
+.blog_left__div h1 {
+    font-family: var(--title);
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.blog_left__div .blog_title {
+    font-weight: 400;
+    font-size: 2.2rem;
+}
+
+.blog_left__div .blog_title span {
+    color: #1b262c;
+}
+
+.blog_left__div p {
+    color: #333d46;
+    /* white-space: nowrap;  */
+    /* width: 50px;  */
+    /* overflow: hidden;
+    text-overflow: ellipsis;  */
+    /* border: 1px solid #000000; */
+}
+
+.left_div_btns {
+    margin-top: 3rem;
+    transition: var(--eff);
+}
+
+.left_div__edit {
+    color: var(--btn-font-color);
+    /*border-width: .2rem;*/
+    font-size: var(--btn-font);
+    transition: var(--eff);
+    padding: .8rem 2rem;
+    background-color: var(--btn-color);
+    border-color: var(--btn-color);
+    font-family: var(--title);
+    outline: none;
+    border: none;
+}
+
+.left_div__delete {
+    color: var(--btn-font-color);
+    /*border-width: .2rem;*/
+    font-size: var(--btn-font);
+    transition: var(--eff);
+    padding: .8rem 2rem;
+    background-color: var(--btn-color);
+    border-color: var(--btn-color);
+    font-family: var(--title);
+    outline: none;
+    border: none;
+}
+

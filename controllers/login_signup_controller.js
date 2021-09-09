@@ -5,6 +5,7 @@ const Details = require('./../models/model');
 const bcrypt = require("bcryptjs");
 const { errorMonitor } = require("events");
 const { use } = require("../routes/login_signup");
+const Article = require('./../models/article')
 const app = express()
 
 app.set('view engine', 'ejs');
@@ -40,6 +41,18 @@ module.exports.register_get = (req, res) => {
 module.exports.login_get = (req, res) => {
     res.render('login');
 }
+
+module.exports.profile_get = async (req, res) => {
+
+    const articles = await Article.find().sort({ createdAt: 'desc'})
+
+    // total posts by logged in user
+    const totalPosts = await Article.find({createdById: res.locals.user._id})
+
+    res.render('profile' , {articles : articles , totalPosts : totalPosts});
+}
+
+
 
 module.exports.register_post = async (req, res) => {
 
@@ -97,9 +110,9 @@ module.exports.login_post = async (req, res) => {
             const token = await userData.generateAuthToken();
 
             // storing cookies
-            // var maxTime = 10 * 60 * 60
+            // var maxTime = 10 * 60 * 60 //  not worked because variable name for cookie must be maxAge
             res.cookie("jwtoken" , token , {
-                expires: new Date(Date.now() + 3600000),
+                // expires: new Date(Date.now() + 3600000),
                 // expiresIn: maxTime*1000,
                 httpOnly: true
             })

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const slugify = require('slugify')
-
+const Schema = mongoose.Schema
 
 
 const articleSchema = new mongoose.Schema({
@@ -25,9 +25,17 @@ const articleSchema = new mongoose.Schema({
         unique:true
     },
     createdBy:{
-        type:String,
-        // default : 
-    }
+        type:Schema.Types.Object
+    },
+    createdById:{
+        type:Schema.Types.ObjectId
+    },
+    image:{
+        type:String
+    },
+    likes:[{type: Schema.Types.ObjectId , ref:'user'}],
+    comments:[{type:Schema.Types.Object
+     }]
 })
 
 
