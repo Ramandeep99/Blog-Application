@@ -18,19 +18,23 @@ module.exports.other_profile_get = async (req, res) => {
     // console.log(user)   
 
     const articles = await Article.find({ createdById: user.id })
+    
+    const totalPosts = await Article.find({createdById: res.locals.user._id})
+
     // console.log(articles)
     // res.json(articles)
-    res.render('otherUserProfile', { otherUser: user, articles: articles });
+    res.render('otherUserProfile', { otherUser: user, articles: articles ,totalPosts : totalPosts});
 }
 
 module.exports.bookmark_get = async (req, res) => {
 
     // const user = await Details.findOne({ _id: req.params.id });
-    // console.log(user)   
+    // console.log(user)
+    const totalPosts = await Article.find({createdById: res.locals.user._id})
 
     const articles = await Article.find()
  
-    res.render('bookmark' , {articles : articles});
+    res.render('bookmark' , {articles : articles , totalPosts : totalPosts});
 }
 
 module.exports.follow_put = async (req, res) => {

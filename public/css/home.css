@@ -216,13 +216,6 @@ span{
 
 
 
-/* to make right side sticky */
-/* .stick_btm{
-position: -webkit-sticky;
-  position: sticky;
-  bottom: 0;
-  padding: 5px;
-} */
 /* responsive */
 
 
@@ -263,3 +256,20 @@ position: -webkit-sticky;
 
 } */
 
+
+
+
+/*  to modifiy right side  */
+
+.fixedElement {
+    /* background-color: #c0c0c0; */
+    position:sticky;
+    top:0;
+    width:100%;
+    z-index:100;
+}
+
+
+/* .rightDivblock{
+	display:none;
+} */

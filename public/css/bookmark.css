@@ -21,9 +21,10 @@ html {
 
 
 p,
+label,
 span,
 .comment,
-label,
+a,
 input::placeholder {
     font-size: 1.9rem;
     line-height: 170%;
@@ -35,7 +36,6 @@ input::placeholder {
     line-height: 170%;
 }
 
-figure img,
 .fab,
 .fas {
     transition: var(--eff);
@@ -54,16 +54,75 @@ body {
 
 
 
-/*left side vblog stykle start*/
+/* right div  */
+
+.right_div__title { 
+    background: #fff;
+    box-shadow: 0 1rem 3rem -1rem rgba(255, 255, 255, 0.7);
+}
+
+.right_div__title h2 {
+    font-size: 3rem;
+    padding-left: 2rem;
+    display: flex;
+    justify-content: center;
+
+}
+
+
+.right_sub__div {
+    background: #fff;
+    padding: 2.5rem 1rem;
+}
+
+
+
+
+.profile_main p{
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.follow-follower{
+    grid-gap: 2rem;
+}
+
+.follow-follower{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.follow-follower p{
+    font-size: 2.7rem;
+}
+
+.profile_img{
+    font-size: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.new_blog a{
+    font-size: 2.7rem;
+}
+
+.new_blog{
+    display: flex;
+    justify-content: center;
+}
+
+
+/*  posts div */
+
 
 
 figure img:hover,
-.left_div__save:hover,
-.left_div__like:hover,
-.left_div__comment:hover,
 .left_div__edit:hover,
-.left_div__delete:hover,
-#edit_btn {
+.left_div__delete:hover {
     transform: translateY(-0.5rem);
     box-shadow: 0 1rem 3rem -1rem rgba(255, 255, 255, 0.7);
 }
@@ -88,8 +147,8 @@ figure img:hover,
     color: #333d46;
     /* white-space: nowrap;  */
     /* width: 50px;  */
-    /* overflow: hidden; */
-    /* text-overflow: ellipsis;  */
+    /* overflow: hidden;
+    text-overflow: ellipsis;  */
     /* border: 1px solid #000000; */
 }
 
@@ -99,19 +158,6 @@ figure img:hover,
 }
 
 .left_div__like {
-    color: var(--btn-font-color);
-    /*border-width: .2rem;*/
-    font-size: var(--btn-font);
-    transition: var(--eff);
-    padding: .8rem 2rem;
-    background-color: var(--btn-color);
-    border-color: var(--btn-color);
-    font-family: var(--title);
-    outline: none;
-    border: none;
-}
-
-.left_div__comment {
     color: var(--btn-font-color);
     /*border-width: .2rem;*/
     font-size: var(--btn-font);
@@ -137,67 +183,3 @@ figure img:hover,
     border: none;
 }
 
-.left_div__delete {
-    color: var(--btn-font-color);
-    /*border-width: .2rem;*/
-    font-size: var(--btn-font);
-    transition: var(--eff);
-    padding: .8rem 2rem;
-    background-color: var(--btn-color);
-    border-color: var(--btn-color);
-    font-family: var(--title);
-    outline: none;
-    border: none;
-}
-
-.left_div__edit {
-    color: var(--btn-font-color);
-    /*border-width: .2rem;*/
-    font-size: var(--btn-font);
-    transition: var(--eff);
-    padding: .8rem 1.5rem;
-    background-color: var(--btn-color);
-    border-color: var(--btn-color);
-    font-family: var(--title);
-    outline: none;
-    border: none;
-}
-
-#edit_btn:hover{
-    color: black;
-}
-
-figure img{
-    max-width: 100%;
-    max-height: 500px;
-}
-
-
-figure{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-span{
-    color: black
-}
-
-/* comments */
-
-.replies{
-    margin-top: 2rem;
-    transition: var(--eff);
-    padding: 1rem 0;
-}
-
-.thapa_show {
-    margin: 20px 0;
-    transition: var(--eff);
-    display: block;
-}
-
-textarea{
-    border: none;
-}

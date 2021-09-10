@@ -41,7 +41,7 @@ app.set('views' , path.join(__dirname ,'/templates/views'))
 app.get('*' , currentUser)  // to apply this middleware to all the routes
 app.get('/',async (req,res) =>{
     const articles = await Article.find().sort({ createdAt: 'desc'})
-    res.render('index' , {articles : articles}); 
+    res.render('login' , {articles : articles}); 
 })
 
 app.get('/home' , requireAuth ,  async (req,res) =>{
@@ -51,6 +51,9 @@ app.get('/home' , requireAuth ,  async (req,res) =>{
 
 app.use('/login_signup',userRouter)
 app.use('/articles',articleRouter)
-app.use('/user',otherUser)
+// app.use('/user',otherUser)
 
 app.listen(port);  
+
+
+// have to add created at in comment schema

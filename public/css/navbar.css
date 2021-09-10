@@ -14,16 +14,18 @@
 
 .logo{
     color: red;
+    font-size: 25px;
+    margin-left: 10px;
 }
 
 #nav{
-    padding: 8px;
+    padding: 8px;   
 }
 
-#logo{
+/* #logo{
     font-size: 25px;
     margin-left: 15px;
-}
+} */
 
 #home{
     font-size: 22px;

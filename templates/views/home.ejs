@@ -9,7 +9,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <!-- to get space from sides -->
-                    <div class="col-xl-10 col-lg-10 col-md-11 col-11 mx-auto my-5">
+                    <div class="col-xl-10 col-lg-10 col-md-11 col-11 mx-auto mb-5 mt-5">
                         <div class="row gx-5 mx-sm-auto">
                             <!-- to get left side div -->
                             <div class="col-lg-8 col-md-11 col-11 mx-auto">
@@ -23,17 +23,19 @@
                                                     onclick="document.location.href = 'http:/articles/<%= article.slug %>'">
                                                     <%= article.title %>
                                                 </h1>
-                                                <p class="blog_title">Created On: <span  class="font-weight-bold">
+                                                <p class="blog_title">Created On: <span class="font-weight-bold">
                                                         <%= article.createdAt.toLocaleDateString() %>
                                                     </span> </p>
-                                                <p class="blog_title">Created By: <span onclick="userProfile_func(event)"
-                                                    data-post-id="<%= article.createdBy._id %>" id="userName" class="font-weight-bold">
+                                                <p class="blog_title">Created By: <span
+                                                        onclick="userProfile_func(event)"
+                                                        data-post-id="<%= article.createdBy._id %>" id="userName"
+                                                        class="font-weight-bold">
                                                         <%= article.createdBy.name %>
                                                     </span> </p>
                                             </div>
                                             <figure class="right_side__img mb-5">
-                                                <img src="/uploads/<%= article.image %>" class="img-fluid shadow" style="height: 500px; width: 100%;"
-                                                    alt="">
+                                                <img src="/uploads/<%= article.image %>" class="img-fluid shadow"
+                                                    style="height: 500px; width: 100%;" alt="">
                                             </figure>
                                             <p class="read_more"
                                                 onclick="document.location.href = '/articles/<%= article.slug %>'">Lorem
@@ -52,12 +54,7 @@
                                                 elit.
                                                 Dignissimos, ipsum.</p>
                                             <div class="d-flex justify-content-between left_div_btns">
-                                                <!-- <form
-                                                    action="/articles/like/<%= article.id %>?_method=PUT" method="POST">
-                                                    <button type="submit" class="left_div__like" id="like_btn">
-                                                        <i class="far fa-thumbs-up"></i> Like
-                                                    </button>
-                                                </form> -->
+
                                                 <% if(article.likes.includes(user._id)) { %>
                                                     <div>
                                                         <button onclick="like_func(event);"
@@ -81,26 +78,23 @@
                                                             </span>
                                                         </div>
                                                         <% } %>
-                                                    <% if(user.bookmarks.includes(article._id)) { %>
-                                                            <div>
-                                                                <!-- <button class="left_div__save" id="save_btn">
-                                                                    <i class="far fa-bookmark"></i> Unsave
-                                                                </button> -->
-                                                                <button onclick="save_func(event);"
-                                                                    data-post-id="<%= article.id %>" class="left_div__save"
-                                                                    id="save_btn">
-                                                                    Unsave
-                                                                </button>
-                                                            </div>
-                                                    <% } else { %>
-                                                        <div>
-                                                            <button onclick="save_func(event);"
-                                                                data-post-id="<%= article.id %>" class="left_div__save"
-                                                                id="save_btn">
-                                                                Save
-                                                            </button>
-                                                        </div>
-                                                    <% } %>
+                                                            <% if(user.bookmarks.includes(article._id)) { %>
+                                                                <div>
+                                                                    <button onclick="save_func(event);"
+                                                                        data-post-id="<%= article.id %>"
+                                                                        class="left_div__save" id="save_btn">
+                                                                        Unsave
+                                                                    </button>
+                                                                </div>
+                                                                <% } else { %>
+                                                                    <div>
+                                                                        <button onclick="save_func(event);"
+                                                                            data-post-id="<%= article.id %>"
+                                                                            class="left_div__save" id="save_btn">
+                                                                            Save
+                                                                        </button>
+                                                                    </div>
+                                                                    <% } %>
 
                                             </div>
                                         </div>
@@ -108,8 +102,9 @@
                                 </div>
                             </div>
                             <!-- to get right side div -->
-                            <div class="col-lg-3 col-md-9 col-11 justify-content-center m-lg-0 m-auto">
-                                <div class=" right_div__post ">
+                            <div class="col-lg-3 col-md-9 col-11 justify-content-center m-lg-0 m-auto fixedElement "
+                                style="overflow:scroll; height:610px;" id="rightDiv">
+                                <div class="right_div__post">
                                     <div class="right_div__title py-4 pl-2">
                                         <h2>Profile</h2>
                                     </div>
@@ -117,11 +112,17 @@
                                         <div class="profile_img mb-4"><i class="fas fa-portrait" id="photo-icon"></i>
                                         </div>
                                         <div class="profile_main bg-light shadow">
-                                            <p><%= user.name %></p>
+                                            <p>
+                                                <%= user.name %>
+                                            </p>
                                         </div>
                                         <div class="follow-follower mt-4 ">
-                                            <p class="bg-light shadow">Follower <strong class="mx-3"> <%= user.followers.length %> </strong></p>
-                                            <p class="bg-light shadow">Following <strong class="mx-3"> <%= user.following.length %> </strong> </p>
+                                            <p class="bg-light shadow">Follower <strong class="mx-3">
+                                                    <%= user.followers.length %>
+                                                </strong></p>
+                                            <p class="bg-light shadow">Following <strong class="mx-3">
+                                                    <%= user.following.length %>
+                                                </strong> </p>
                                             <!-- on clicking this user can move to his/her profile page work to do -->
                                             <p class="bg-light shadow"> <a href="/login_signup/bookmark">BookMarks</a>
                                             </p>
@@ -138,16 +139,14 @@
                                         <h2>Tags</h2>
                                     </div>
                                     <div class="tags_main right_sub__div">
-                                        <a href="#" class="badge shadow text-capitalize"> html </a>
-                                        <a href="#" class="badge shadow text-capitalize"> css </a>
-                                        <a href="#" class="badge shadow text-capitalize"> js </a>
-                                        <a href="#" class="badge shadow text-capitalize"> react </a>
-                                        <a href="#" class="badge shadow text-capitalize"> vue </a>
-                                        <a href="#" class="badge shadow text-capitalize"> php </a>
-                                        <a href="#" class="badge shadow text-capitalize"> python </a>
-                                        <a href="#" class="badge shadow text-capitalize"> kotlin </a>
-                                        <a href="#" class="badge shadow text-capitalize"> c++ </a>
-                                        <a href="#" class="badge shadow text-capitalize"> java </a>
+                                        <a href="#" class="badge shadow text-capitalize"> Music </a>
+                                        <a href="#" class="badge shadow text-capitalize"> Technology </a>
+                                        <a href="#" class="badge shadow text-capitalize"> Food </a>
+                                        <a href="#" class="badge shadow text-capitalize"> Cricket </a>
+                                        <a href="#" class="badge shadow text-capitalize"> Internet </a>
+                                        <a href="#" class="badge shadow text-capitalize"> Books </a>
+                                        <a href="#" class="badge shadow text-capitalize"> Travel </a>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +154,7 @@
                     </div>
                 </div>
             </div>
-            </div>
+
 
 
             <!-- JS  -->
@@ -168,16 +167,13 @@
                 crossorigin="anonymous"></script>
             <script type="text/javascript">
 
-                
-                // for follower-following
-
 
 
                 // for user profile
                 const userProfile_func = async (e) => {
                     e.preventDefault();
                     var postId = event.target.dataset.postId;
-                    
+
                     try {
                         const otherUser = await fetch(`/login_signup/other_profile/${postId}`, {
 
@@ -254,18 +250,18 @@
                     }
                 };
 
-            
+
                 const save_func = async (e) => {
-                    
+
                     e.preventDefault();
                     var postId = event.target.dataset.postId;
                     console.log(postId)
 
                     // we can also implement that a post a alread saved in a user collection or not with action below
                     var action = event.target.textContent.trim();
-                    
+
                     toggleButtonTextSave[action](event.target);
-                    
+
 
                     try {
                         const saved = await fetch(`/login_signup/bookmark/${postId}`, {
@@ -346,46 +342,7 @@
             </script>
 
 
-            <!--  -->
-            <!-- <div class="container">
-                <h1 class="mb-4 mt-2 blog-div">Blog Article</h1> -->
-            <!-- <a href="/articles/new" class="btn btn-success">New Article</a> -->
-            <!-- 
-                <% articles.forEach(article=> { %>
-                    <div class="card mt-4">
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <%= article.title %>
-                            </h4>
-                        </div>
-                        <div class="card-subtitle text-muted mb-2">
-                            <%= article.createdAt.toLocaleDateString() %>
-                        </div>
-                        <div class="card-text mb-2">
-                            <%= article.description %> <br>
-                                <a href="articles/<%= article.slug %>" class="btn btn-primary">Read More</a>
-
-                                 logic to check for delete & edit of a blog -->
-            <!-- <% if( (article.createdBy)===(user.email) ) { %>
-
-                                    <a href="articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
-
-                                    <form class="d-inline delete-btn"
-                                        action="/articles/<%= article.id %>?_method=DELETE" method="POST">
-                                        <button type="submit" class="btn btn-danger">
-                                            Delete
-                                        </button>
-                                    </form>
-                                    <% } else { %>
-                                        <div></div>
-                                        <% } %>
-
-                        </div>
-                    </div>
-                    <% }) %>
-            </div> -->
-
-
-
 
     </body>
+
+    </html>
