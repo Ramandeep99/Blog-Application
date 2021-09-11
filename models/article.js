@@ -21,8 +21,7 @@ const articleSchema = new mongoose.Schema({
     },
     slug:{
         type:String,
-        required:true,
-        unique:true
+        required:true
     },
     createdBy:{
         type:Schema.Types.Object
@@ -31,11 +30,15 @@ const articleSchema = new mongoose.Schema({
         type:Schema.Types.ObjectId
     },
     image:{
+        type:String,
+        
+    },
+    category:{
         type:String
     },
     likes:[{type: Schema.Types.ObjectId , ref:'user'}],
-    comments:[{type:Schema.Types.Object
-     }]
+    comments:[{type:Schema.Types.Object}]
+    
 })
 
 

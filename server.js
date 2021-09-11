@@ -14,6 +14,9 @@ const { json } = require('express');
 const {requireAuth , currentUser} = require('./middleware/login_signup_mw');
 const logger = require('morgan')
 const port = 2000;
+const moment = require("moment");
+
+
 
 // console.log(__dirname)
 dotenv.config({path : './config.env'});
@@ -30,6 +33,10 @@ app.use(express.static('public'))
 app.use(cookieParser())
 // app.use(logger('combined'));
 app.use(json())
+app.use((req, res, next)=>{
+    res.locals.moment = moment;
+    next();
+  });
 
 
 // view engines

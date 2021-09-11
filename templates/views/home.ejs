@@ -30,7 +30,9 @@
                                                         onclick="userProfile_func(event)"
                                                         data-post-id="<%= article.createdBy._id %>" id="userName"
                                                         class="font-weight-bold">
-                                                        <%= article.createdBy.name %>
+                                                        <%= article.createdBy.name %> <span id="in">in</span> <span>
+                                                                <%= article.category %>
+                                                            </span>
                                                     </span> </p>
                                             </div>
                                             <figure class="right_side__img mb-5">
@@ -139,14 +141,14 @@
                                         <h2>Tags</h2>
                                     </div>
                                     <div class="tags_main right_sub__div">
-                                        <a href="#" class="badge shadow text-capitalize"> Music </a>
-                                        <a href="#" class="badge shadow text-capitalize"> Technology </a>
-                                        <a href="#" class="badge shadow text-capitalize"> Food </a>
-                                        <a href="#" class="badge shadow text-capitalize"> Cricket </a>
-                                        <a href="#" class="badge shadow text-capitalize"> Internet </a>
-                                        <a href="#" class="badge shadow text-capitalize"> Books </a>
-                                        <a href="#" class="badge shadow text-capitalize"> Travel </a>
-                                        
+                                        <a href="#" class="badge shadow text-capitalize category"> Music </a>
+                                        <a href="#" class="badge shadow text-capitalize category"> Technology </a>
+                                        <a href="#" class="badge shadow text-capitalize category"> Cricket </a>
+                                        <a href="#" class="badge shadow text-capitalize category"> Internet </a>
+                                        <a href="#" class="badge shadow text-capitalize category"> Books </a>
+                                        <a href="#" class="badge shadow text-capitalize category"> Travel </a>
+                                        <a href="#" class="badge shadow text-capitalize category"> Food </a>
+                                        <a href="#" class="badge shadow text-capitalize category"> Agriculture </a>
                                     </div>
                                 </div>
                             </div>
@@ -167,6 +169,31 @@
                 crossorigin="anonymous"></script>
             <script type="text/javascript">
 
+                // for category
+
+                const categories = document.querySelectorAll('.category');
+
+                categories.forEach(category => {
+                    category.addEventListener('click', async (e) => {
+                        const type = e.target.innerText;
+                        e.preventDefault();
+                        try {
+                            const result = await fetch(`/articles/category/${type}`, {
+
+                                method: 'GET',
+                                headers: {
+                                    "Content-Type": "application/json",
+                                }
+                            })
+                            const data = await result;
+                            // console.log(data)
+                            location.assign(data.url);
+                        }
+                        catch (err) {
+                            console.log('err')
+                        }
+                    })
+                })
 
 
                 // for user profile

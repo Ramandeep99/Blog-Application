@@ -157,8 +157,9 @@
                                                             src="https://img.icons8.com/doodle/48/000000/user-male-skin-type-5.png" />
                                                     </div>
                                                     <div class="reply_text__left">
-                                                        <p class="blog_title "> <span class="font-weight-bold"> Renu,
-                                                            </span> Sept 08, 2021, 12:00 PM </p>
+                                                        <p class="blog_title "> <span class="font-weight-bold"> <%= comment.createdByName %>,
+                                                            </span> <%= moment(comment.createdAt).format('Do MMMM, YYYY') %> </p>
+                                                            
                                                         <p><%= comment.text %></p>
                                                     </div>
                                                 </div>

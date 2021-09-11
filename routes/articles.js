@@ -70,13 +70,17 @@ function PostAndPut(path) {
         // image
         article.image = req.file.filename;
 
+        // category
+        article.category = req.body.category;
+        // console.log(article.category)
+
         try {
             article = await article.save()
-            // console.log(article)
             res.redirect(`/articles/${article.slug}`)
         }
         catch (error) {
-            res.render(`articles/${path}`, { article: article })
+            console.log(error)
+            res.render(`${path}`, { article: article })
         }
     }
 }
@@ -133,7 +137,9 @@ router.put("/comment/:id", currentUser, async (req, res) => {
     // console.log(100)
     const comment_ = {
         text: req.body.data,
-        createdBy: res.locals.user._id
+        createdBy: res.locals.user._id,
+        createdByName: res.locals.user.name,
+        createdAt : Date.now()
     }
 
     try {
@@ -148,6 +154,20 @@ router.put("/comment/:id", currentUser, async (req, res) => {
     catch (error) {
         // console.log(error.message);
         return res.status(500).json({ "msg": error.message });
+    }
+})
+
+
+
+router.get('/category/:type', async (req, res) => {
+    
+    const cat_articles = await Article.find({ category: req.params.type })
+
+    if (cat_articles == undefined || cat_articles==null) {
+        res.redirect('/home')
+    }
+    else {
+        res.render('category', { cat_articles : cat_articles })
     }
 })
 

@@ -9,32 +9,8 @@
                 <div class="col-xl-6 col-lg-6 col-md-11 col-11 mx-auto mt-2 text-center">
 
                     <h1 class="mb-4 mt-2 new_blog">New Article</h1>
-                    <div class="new_blog my-3 ">
-                        <!-- <a type="button" class="btn btn-secondary btns" href="#">Select Category</a> -->
-                        <div class="btn-group">
-                            <!-- <button type="button" class="btn btn-secondary btns">Select Category</button>
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
-                                <span class="caret"></span>
-                            </button> -->
-                            <!-- <ul class="dropdown-menu" role="menu">
-                                <li><a href="#" class="btns">Sports</a></li>
-                                <li><a href="#" class="btns">Smartphones</a></li>
-                                <li><a href="#" class="btns">Music</a></li>
-                            </ul> -->
-                            <input required class="btn btns" list="browsers" placeholder="Select Category">
-                            <datalist id="browsers">
-                                <option value="Internet Explorer">
-                                <option value="Firefox">
-                                <option value="Chrome">
-                                <option value="Opera">
-                                <option value="Safari">
-                            </datalist>
 
-
-                        </div>
-                    </div>
                     <form action="/articles" method="POST" enctype="multipart/form-data">
-                        <!-- <%- include("../partials/_form_fields") %> -->
                         <div class="form-group">
                             <label for="title">Title</label>
                             <input required value="<%= article.title %>" type="text" name="title" id="title"
@@ -43,25 +19,42 @@
 
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea required value="<%= article.description %>" name="description" id="description"
-                                class="form-control"></textarea>
+                            <textarea required  name="description" id="description"
+                                class="form-control" rows="5"><%= article.description %></textarea>
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="markdown">Markdown</label>
-                            <textarea required value="<%= article.markdown %>" name="markdown" id="markdown"
-                                class="form-control"></textarea>
+                            <textarea required  name="markdown" id="markdown"
+                                class="form-control" ><%= article.markdown %></textarea>
                         </div>
 
                         <!-- image upload -->
+                        <div>
+                            <div class="form-group mb-4 text-center">
+                                <label for="image">Upload Image</label>
+                                <input required type='file' name="file" id="image" class="form-control">
+                            </div>
 
-                        <div class="form-group mb-4 text-center">
-                            <label for="image">Upload Image</label>
-                            <input required type='file' name="file" id="image" class="form-control">
+                            <div class="new_blog">
+                                <div class="btn-group my-4">
+                                    <input required class="btn btns" name="category" list="browsers" placeholder="Select Category" id="category">
+                                    <datalist id="browsers">
+                                        <option value="Food">
+                                        <option value="Technology">
+                                        <option value="Internet">
+                                        <option value="Agriculture">
+                                        <option value="Cricket">
+                                        <option value="Books">
+                                        <option value="Travel">
+                                        <option value="Music">
+                                    </datalist>
+                                </div>
+                            </div>
                         </div>
 
-                        <a href="/home" class="btn btn-primary btns mx-5">Cancel</a>
-                        <button class="btn btn-primary btns" type="submit">Save</button>
+                        <a href="/home" class="btn btn-secondary btns mx-3">Cancel</a>
+                        <button class="btn btn-secondary btns mx-3" type="submit">Save</button>
                     </form>
                 </div>
             </div>

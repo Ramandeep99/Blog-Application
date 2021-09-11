@@ -44,52 +44,10 @@
 
         <!-- profile div -->
         <div class="container-fluid">
-            <div class="col-xl-10 col-lg-10 col-md-11 col-11 mx-auto my-5">
-                <div class=" right_div__post  shadow mb-lg-md-5 mb-sm-0">
 
-                    <div class="right_sub__div ">
-                        <div class="profile_img mb-4"><i class="fas fa-portrait" id="photo-icon"></i>
-                        </div>
-                        <div class="profile_main">
-                            <p>
-                                <%= otherUser.name %>
-                            </p>
-                        </div>
-                        <div class="follow-follower mt-4">
-                            <p>Posts <strong class="mx-2">
-                                    <%= totalPosts.length %>
-                                </strong></p>
-                            <p>Follower <strong class="mx-2">
-                                    <%= otherUser.followers.length %>
-                                </strong></p>
-                            <p>Following <strong class="mx-2">
-                                    <%= otherUser.following.length %>
-                                </strong> </p>
-                        </div>
-                        <% if( (otherUser.email)===(user.email) ) { %>
-                            <div class="new_blog mt-4">
-                                <a type="button" class="btn btn-secondary" href="/articles/new">Create New </a>
-                            </div>
-
-                            <% } else { %>
-                                <% if(otherUser.followers.includes(user._id)) { %>
-                                    <div class="new_blog mt-4">
-                                        <a type="button" class="btn btn-secondary" onclick="follow_func(event)"
-                                            data-post-id="<%= otherUser._id %>" id="follow_btn"> Unfollow </a>
-                                    </div>
-                                    <% } else { %>
-                                        <div class="new_blog mt-4">
-                                            <a type="button" class="btn btn-secondary" onclick="follow_func(event)"
-                                                data-post-id="<%= otherUser._id %>" id="follow_btn"> Follow </a>
-                                        </div>
-                                        <% } %>
-                                            <% } %>
-                    </div>
-                </div>
-            </div>
 
             <!-- posts by user -->
-            <% articles.forEach(article=> { %>
+            <% cat_articles.forEach(article=> { %>
                 <% if( (article.createdBy.email)===(user.email) ) { %>
 
                     <div class="col-lg-8 col-md-11 col-11 mx-auto">
@@ -208,6 +166,7 @@
                         <% } %>
                             <% }) %>
 
+
         </div>
 
 
@@ -223,49 +182,6 @@
         <script type="text/javascript">
 
 
-            // for follower-following
-            const follow = document.getElementById('follow_btn');
-
-
-
-
-            const follow_func = async (e) => {
-
-                // e.preventDefault();
-
-                var toggleButtonText = {
-                    Follow: function (button) {
-                        button.textContent = "Unfollow";
-                    },
-                    Unfollow: function (button) {
-                        button.textContent = "Follow";
-                    }
-                };
-
-                var postId = event.target.dataset.postId;
-
-                var action = event.target.textContent.trim();
-                // console.log(action)
-                toggleButtonText[action](event.target);
-
-                try {
-                    const followUser = await fetch(`/login_signup/follow/${postId}`, {
-
-                        method: 'PUT',
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
-                    });
-
-                    const url = await followUser.url
-                    // console.log(data.status)
-                    location.reload(url);
-
-                }
-                catch (err) {
-                    console.log(err)
-                }
-            };
 
             // for like btn
             const like = document.getElementById('like_btn');
@@ -356,58 +272,6 @@
 
         </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- 
-             <% - include("../partials/navbar") %>
-                <div class="container">
-                    <h1 class="mb-4 mt-2">Blog Article</h1>
-                    <a href="/articles/new" class="btn btn-success">New Article</a>
-
-                    <% articles.forEach(article=> { %>
-                        <% if( (article.createdBy)===(user.email) ) { %>
-                            <div class="card mt-4">
-                                <div class="card-body">
-                                    <h4 class="card-title">
-                                        <%= article.title %>
-                                    </h4>
-                                </div>
-                                <div class="card-subtitle text-muted mb-2">
-                                    <%= article.createdAt.toLocaleDateString() %>
-                                </div>
-                                <div class="card-text mb-2">
-                                    <%= article.description %> <br>
-                                        <a href="/articles/<%= article.slug %>" class="btn btn-primary">Read More</a>
-
-
-                                        <a href="/articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
-
-                                        <form class="d-inline delete-btn"
-                                            action="/articles/<%= article.id %>?_method=DELETE" method="POST">
-                                            <button type="submit" class="btn btn-danger">
-                                                Delete
-                                            </button>
-                                        </form>
-
-                                </div>
-                            </div>
-                            <% } else { %>
-                                <div></div>
-                                <% } %>
-                                    <% }) %>
-                </div> -->
     </body>
 
     </html>
