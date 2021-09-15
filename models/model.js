@@ -21,6 +21,12 @@ const detailSchema = new mongoose.Schema({
         required: [true , "Please enter a password"],
         minlength :[4,"Minimum password length is 4 characters"]
     },
+    tokens: [{
+        token:{
+            type:String,
+            required:true
+        }
+    }],
     followers:[{type: Schema.Types.ObjectId , ref:'Detail'}],
     following:[{type: Schema.Types.ObjectId , ref:'Detail'}],
     bookmarks:[{type: Schema.Types.ObjectId , ref:'Article'}],
@@ -34,17 +40,17 @@ detailSchema.pre("save" , async function(next){
 })
 
 // generating token
-const maxTime = 10*60*60
 detailSchema.methods.generateAuthToken = async function(){
     try{
-        let token = jwt.sign({_id : this._id} , process.env.SECRETKEY , {
-            expiresIn : maxTime
-        });
-
+        let token = jwt.sign({_id : this._id.toString()} , process.env.SECRETKEY);
+            
+        this.tokens = this.tokens.concat({token:token});
+        await this.save();
         return token;
     }
     catch(error){
         console.log(error)
+        res.send(error)
     }
 }
 

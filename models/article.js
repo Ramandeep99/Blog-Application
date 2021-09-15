@@ -29,10 +29,7 @@ const articleSchema = new mongoose.Schema({
     createdById:{
         type:Schema.Types.ObjectId
     },
-    image:{
-        type:String,
-        
-    },
+    image:[{type:Schema.Types.Object}],
     category:{
         type:String
     },

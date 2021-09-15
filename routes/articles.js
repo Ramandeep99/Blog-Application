@@ -42,7 +42,7 @@ router.get('/:slug', async (req, res) => {
 
 
 
-router.post('/', currentUser, multer.single('file'), async (req, res, next) => {
+router.post('/', currentUser, multer.array('file'), async (req, res, next) => {
 
     // console.log(res.locals.user.email)   // current user is here
     req.article = new Article()
@@ -68,7 +68,10 @@ function PostAndPut(path) {
         // console.log(article.createdBy)
 
         // image
-        article.image = req.file.filename;
+        // article.image = req.file.filename;
+        let imgArr = req.files
+        article.image = req.files;
+        // console.log(imgArr)
 
         // category
         article.category = req.body.category;

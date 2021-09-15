@@ -44,12 +44,12 @@ module.exports.login_get = (req, res) => {
 
 module.exports.profile_get = async (req, res) => {
 
-    const articles = await Article.find().sort({ createdAt: 'desc'})
+    const articles = await Article.find().sort({ createdAt: 'desc' })
 
     // total posts by logged in user
-    const totalPosts = await Article.find({createdById: res.locals.user._id})
+    const totalPosts = await Article.find({ createdById: res.locals.user._id })
 
-    res.render('profile' , {articles : articles , totalPosts : totalPosts});
+    res.render('profile', { articles: articles, totalPosts: totalPosts });
 }
 
 
@@ -75,18 +75,18 @@ module.exports.register_post = async (req, res) => {
             // console.log(token);
 
             // storing cookies
-            var maxTime = 10 * 60 * 60
+            // var maxAge = 10 * 60 * 60 *1000
             res.cookie("jwtoken", token, {
                 httpOnly: true,
                 // expiresIn: maxTime*1000
-                expires : new Date(Date.now() + maxTime)
+                // expires : new Date(Date.now() + maxAge)
             })
 
             // console.log('99')
-            res.status(201).json({registered : registered._id})
+            res.status(201).json({ registered: registered._id })
         }
         else {
-            res.json({'error' : 'Enter same confirm password'})
+            res.json({ 'error': 'Enter same confirm password' })
         }
     }
     catch (error) {
@@ -111,35 +111,50 @@ module.exports.login_post = async (req, res) => {
 
             // storing cookies
             // var maxTime = 10 * 60 * 60 //  not worked because variable name for cookie must be maxAge
-            res.cookie("jwtoken" , token , {
-                // expires: new Date(Date.now() + 3600000),
+            // var maxAge = 1 * 60 * 60 *1000
+            res.cookie("jwtoken", token, {
+                // expires: new Date(Date.now() + maxAge),
                 // expiresIn: maxTime*1000,
                 httpOnly: true
             })
 
             if (isMatch) {
-                res.status(200).json({userData : userData._id});
+                res.status(200).json({ userData: userData._id });
             }
             else {
-                res.json({"password" : "invalid password"});
+                res.json({ "password": "Invalid password" });
             }
         }
         else {
-            res.json({'email' :'InValid Email'})
+            res.json({ 'email': 'Invalid Email' })
         }
     }
     catch (error) {
         handleErrors(error);
-        res.status(400).json({error})
+        res.status(400).json({ error })
     }
 }
 
 
-module.exports.logout_get = (req,res) =>{
-    res.cookie('jwtoken' , "" ,{
-        expires: new Date(Date.now() + 1)
-    });
-    res.redirect('/login_signup/login')
+module.exports.logout_get = async (req, res) => {
+
+    try {
+
+        res.locals.user.tokens = res.locals.user.tokens.filter(currEle =>{
+            return currEle.token != req.token;
+        })
+
+        res.clearCookie('jwtoken' ,{
+            expires: new Date(Date.now() +1),
+        });
+
+        await res.locals.user.save();
+        res.redirect('/login_signup/login')
+    }
+    catch (error) {
+        console.log(error)
+        res.status(500).send(error);
+    }
 }
 
 

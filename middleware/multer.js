@@ -8,9 +8,10 @@ const storage = multer.diskStorage({
     },
     filename: function(req,file,cb){
         // to modifiy name
+        // filename.split('.').slice(0, -1).join('.')
         const ext = file.originalname.substr(file.originalname.lastIndexOf('.'));
 
-        cb(null , file.fieldname + '_' + Date.now() + path.extname(file.originalname) )
+        cb(null , file.originalname.split('.').slice(0, -1) + '_' + Date.now() + ext)
     }
 })
 
