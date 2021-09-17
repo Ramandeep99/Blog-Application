@@ -19,10 +19,15 @@
     font-size: 62.5%;
 } */
 
+/* .input{
+    height: 50px;
+    font-size: 20px;
+} */
 
 p,
 label,
-input::placeholder {
+input::placeholder,
+textarea::placeholder {
     font-size: 1.5rem;
     line-height: 170%;
     color: #6c757d;

@@ -184,6 +184,7 @@
                                                 </div>
                                             </form>
 
+                                            <!-- <% if(article.comments) { %> -->
                                             <% article.comments.forEach(comment=> { %>
                                             <div class="replies" id="reply1">
                                                 <div
@@ -194,13 +195,14 @@
                                                     </div>
                                                     <div class="reply_text__left">
                                                         <p class="blog_title "> <span class="font-weight-bold"> <%= comment.createdByName %>,
-                                                            </span> <%= moment(comment.createdAt).format('Do MMMM, YYYY') %> </p>
-                                                            
+                                                            </span> <%= moment(comment.createdAt).format('Do MMMM, YYYY  HH:mm ') %> </p>
+                                                            <!-- yyyy-MM-dd HH:mm -->
                                                         <p><%= comment.text %></p>
                                                     </div>
                                                 </div>
                                             </div>
                                              <% }) %>
+                                             <!-- <% } %> -->
                                                         
                             </div>
 

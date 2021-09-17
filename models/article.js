@@ -4,9 +4,9 @@ const Schema = mongoose.Schema
 
 
 const articleSchema = new mongoose.Schema({
+    
     title:{
-        type:String,
-        required:true
+        type:String,   
     },
     description: {
         type:String
@@ -45,7 +45,7 @@ articleSchema.pre('validate' , function(next){
     if(this.title){
         this.slug = slugify(this.title , {
             lower:true,
-            strict:true})
+            })
     }
     next()
 })

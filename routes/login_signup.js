@@ -4,13 +4,13 @@ const other_user_profile_controllers = require('../controllers/user_controllers'
 const { requireAuth, currentUser, userName } = require('./../middleware/login_signup_mw');
 const router = express.Router();
 
-router.get('/register', authcontrollers.register_get);
+router.get('/register',currentUser,  authcontrollers.register_get);
 
-router.get('/login', authcontrollers.login_get);
+router.get('/login',currentUser, authcontrollers.login_get);
 
-router.post('/login', authcontrollers.login_post);
+router.post('/login',currentUser, authcontrollers.login_post);
 
-router.post('/register', authcontrollers.register_post);
+router.post('/register',currentUser, authcontrollers.register_post);
 
 router.get('/logout',currentUser, authcontrollers.logout_get);
 

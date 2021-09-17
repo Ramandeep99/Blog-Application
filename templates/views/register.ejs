@@ -2,109 +2,144 @@
 
 
     <body>
-        <%- include("../partials/navbar") %>
-            <div class="container text-center main-div">
-                <div class="row justify-content-center">
-                    <div class="col-lg-4 col-sm-6 col-md-6">
+        <!-- <%- include("../partials/navbar") %> -->
 
-                        <!-- action="/login_signup/register" method="POST" -->
-                        <form class="form-div" id="form">
+        <nav class="navbar navbar-expand-md  navbar-dark" id="nav">
+            <a class="navbar-brand logo" href="#" id="logo">GO BLOG</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ml-auto">
+                    
+                    <!-- <% if(user) { %> -->
+                        <!-- <li class="nav-item">
+                            <a class="nav-link text-light" href="/home" id="home">Home</a>
+                        </li>
 
-                            <h2 class="mb-3">REGISTER</h2>
-                            <div class="form-group">
-                                <input required value="" type="text" name="name" id="name" class="form-control"
-                                    placeholder="Name">
-                            </div>
-                            <div class="form-name"></div>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="./../login_signup/profile" id="username"> Welcome, <%=
+                                    user.name %> </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="./../login_signup/logout" id="logout">Log out</a>
+                        </li>
+                        <% } else { %> -->
 
-                            <div class="form-group">
-                                <input required value="" type="text" name="email" id="email" class="form-control"
-                                    placeholder="Email Id">
-                            </div>
-                            <div class="form-email"></div>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="./../login_signup/login" id="login">Log in</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="./../login_signup/register" id="signup">Sign up</a>
+                            </li>
+                            <!-- <% } %> -->
 
-                            <div class="form-group">
-                                <input required value="" type="text" name="password" id="password" class="form-control"
-                                    placeholder="Password">
-                            </div>
-                            <div class="form-password"></div>
+                </ul>
+            </div>
+        </nav>
 
-                            <div class="form-group">
-                                <input required value="" type="text" name="confirm_password" id="confirm-password"
-                                    class="form-control" placeholder="Confirm Password">
-                            </div>
-                            <div class="form-cpassword"></div>
+        <div class="container text-center main-div">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-sm-6 col-md-6">
 
-                            <div class="form-group mt-4">
-                                <button class="btn btn-primary btn-block" type="submit" value="Submit"
-                                    id="submit-btn">Submit</button>
-                            </div>
+                    <!-- action="/login_signup/register" method="POST" -->
+                    <form class="form-div" id="form">
 
-                            <div class="form-group mt-4">
-                                <p>Already Have an Account. <a href="./login">Login Here</a></p>
-                            </div>
+                        <h2 class="mb-3">REGISTER</h2>
+                        <div class="form-group">
+                            <input required value="" type="text" name="name" id="name" class="form-control"
+                                placeholder="Name">
+                        </div>
+                        <div class="form-name"></div>
 
-                        </form>
-                    </div>
+                        <div class="form-group">
+                            <input required value="" type="text" name="email" id="email" class="form-control"
+                                placeholder="Email Id">
+                        </div>
+                        <div class="form-email"></div>
+
+                        <div class="form-group">
+                            <input required value="" type="password" name="password" id="password" class="form-control"
+                                placeholder="Password">
+                        </div>
+                        <div class="form-password"></div>
+
+                        <div class="form-group">
+                            <input required value="" type="password" name="confirm_password" id="confirm-password"
+                                class="form-control" placeholder="Confirm Password">
+                        </div>
+                        <div class="form-cpassword"></div>
+
+                        <div class="form-group mt-4">
+                            <button class="btn btn-primary btn-block" type="submit" value="Submit"
+                                id="submit-btn">Submit</button>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <p>Already Have an Account. <a href="./login">Login Here</a></p>
+                        </div>
+
+                    </form>
                 </div>
             </div>
+        </div>
 
-            <!-- <script src="./../../public/registerjs.js"></script> -->
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-                crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
-                integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
-                crossorigin="anonymous"></script>
-
-
-            <script>
+        <!-- <script src="./../../public/registerjs.js"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+            integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+            crossorigin="anonymous"></script>
 
 
-                const formFields = document.querySelector('form');
+        <script>
 
-                const name_error = document.querySelector('.form-name');
-                const email_error = document.querySelector('.form-email');
-                const password_error = document.querySelector('.form-password');
-                const confirm_password_error = document.querySelector('.form-cpassword');
 
-                formFields.addEventListener('submit', async (e) => {
-                    e.preventDefault();
+            const formFields = document.querySelector('form');
 
-                    // reset error-divs
-                    email_error.innerText = "";
-                    password_error.innerText = "";
+            const name_error = document.querySelector('.form-name');
+            const email_error = document.querySelector('.form-email');
+            const password_error = document.querySelector('.form-password');
+            const confirm_password_error = document.querySelector('.form-cpassword');
 
-                    // get values 
-                    const name = formFields.name.value;
-                    const email = formFields.email.value;
-                    const password = formFields.password.value;
-                    const confirm_password = formFields.confirm_password.value;
+            formFields.addEventListener('submit', async (e) => {
+                e.preventDefault();
 
-                    try {
-                        const res = await fetch('/login_signup/register', {
-                            method: "POST",
-                            body: JSON.stringify({ name, email, password, confirm_password }),
-                            headers: { "Content-Type": "application/json" }
-                        });
+                // reset error-divs
+                // email_error.innerText = "";
+                // password_error.innerText = "";
 
-                        const data = await res.json();
-                        // console.log(data);
-                        if (data.errors) {
-                            email_error.innerText = data.errors.email;
-                            password_error.innerText = data.errors.password;
-                        }
-                        if (data.registered) {
-                            location.assign('/login_signup/login');
-                        }
+                // get values 
+                const name = formFields.name.value;
+                const email = formFields.email.value;
+                const password = formFields.password.value;
+                const confirm_password = formFields.confirm_password.value;
+
+                try {
+                    const res = await fetch('/login_signup/register', {
+                        method: "POST",
+                        body: JSON.stringify({ name, email, password, confirm_password }),
+                        headers: { "Content-Type": "application/json" }
+                    });
+
+                    const data = await res.json();
+                    // console.log(data);
+                    if (data.errors) {
+                        email_error.innerText = data.errors.email;
+                        password_error.innerText = data.errors.password;
                     }
-                    catch (err) {
-                        console.log(err);
+                    if (data.registered) {
+                        location.assign('/login_signup/login');
                     }
+                }
+                catch (err) {
+                    console.log(err);
+                }
 
-                })
+            })
 
-            </script>
+        </script>
 
     </body>
 

@@ -7,12 +7,20 @@
 
             <!-- div seperation -->
             <div class="container-fluid">
+
                 <div class="row">
                     <!-- to get space from sides -->
                     <div class="col-xl-10 col-lg-10 col-md-11 col-11 mx-auto mb-5 mt-5">
+                        <p>
+                            <button class="btn btn-info btn-lg btn-block rightDivblock mx-auto"
+                                style="font-size: larger;" id="dupbtn" type="button" data-toggle="collapse"
+                                data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                Profile
+                            </button>
+                        </p>
                         <div class="row gx-5 mx-sm-auto">
                             <!-- to get left side div -->
-                            <div class="col-lg-8 col-md-11 col-11 mx-auto">
+                            <div class="col-lg-8 col-md-11 col-11 mx-auto" style="position: relative;">
                                 <div class="row gy-5">
                                     <!-- first blog -->
                                     <% articles.forEach(article=> { %>
@@ -78,42 +86,14 @@
                                             </figure>
 
 
-
-
-
-
-                   
-
-
-
-
-
-
-
-
-
                                             <p class="read_more"
                                                 onclick="document.location.href = '/articles/<%= article.slug %>'">
-                                                Lorem
-                                                Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit. Ipsam, libero
-                                                veritatis ullam officia sit error laboriosam omnis dolor vero
-                                                repellat!
-                                                ipsum dolor sit amet consectetur adipisicing elit. Blanditiis
-                                                sint ullam
-                                                placeat vitae laudantium recusandae architecto temporibus
-                                                delectus est
-                                                esse.
+                                                <%= article.description %>
+                                                
                                             </p>
                                             <p class=" read_more"
                                                 onclick="document.location.href = '/articles/<%= article.slug %>'">
-                                                Lorem
-                                                Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit. Sunt quas
-                                                illum dolorem commodi? ipsum dolor sit amet consectetur
-                                                adipisicing
-                                                elit.
-                                                Dignissimos, ipsum.</p>
+                                                <%= article.markdown %></p>
                                             <div class="d-flex justify-content-between left_div_btns">
 
                                                 <% if(article.likes.includes(user._id)) { %>
@@ -162,6 +142,68 @@
                                         <% }) %>
                                 </div>
                             </div>
+
+
+                            <!-- duplicate right side div -->
+
+
+                            <div class="collapse duplicateDiv" id="collapseExample">
+                                <div class="col-lg-3 col-md-9 col-11 justify-content-center m-lg-0 m-auto"
+                                    style="overflow:scroll; height:610px;">
+                                    <div class="right_div__post">
+                                        <div class="right_div__title py-4 pl-2">
+                                            <h2>Profile</h2>
+                                        </div>
+                                        <div class="right_sub__div">
+                                            <div class="profile_img mb-4"><i class="fas fa-portrait"
+                                                    id="photo-icon"></i>
+                                            </div>
+                                            <div class="profile_main bg-light shadow">
+                                                <p>
+                                                    <%= user.name %>
+                                                </p>
+                                            </div>
+                                            <div class="follow-follower mt-4 ">
+                                                <p class="bg-light shadow">Follower <strong class="mx-3">
+                                                        <%= user.followers.length %>
+                                                    </strong></p>
+                                                <p class="bg-light shadow">Following <strong class="mx-3">
+                                                        <%= user.following.length %>
+                                                    </strong> </p>
+                                                <p class="bg-light shadow"> <a
+                                                        href="/login_signup/bookmark">BookMarks</a>
+                                                </p>
+                                                <p class="bg-light shadow"> <a href="/articles/new">Create New</a></p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="right_div__post mt-5">
+                                        <div class="right_div__title py-4 pl-2">
+                                            <h2>Tags</h2>
+                                        </div>
+                                        <div class="tags_main right_sub__div">
+                                            <a href="#" class="badge shadow text-capitalize category"> Music </a>
+                                            <a href="#" class="badge shadow text-capitalize category"> Technology </a>
+                                            <a href="#" class="badge shadow text-capitalize category"> Cricket </a>
+                                            <a href="#" class="badge shadow text-capitalize category"> Internet </a>
+                                            <a href="#" class="badge shadow text-capitalize category"> Books </a>
+                                            <a href="#" class="badge shadow text-capitalize category"> Travel </a>
+                                            <a href="#" class="badge shadow text-capitalize category"> Food </a>
+                                            <a href="#" class="badge shadow text-capitalize category"> Agriculture </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
                             <!-- to get right side div -->
                             <div class="col-lg-3 col-md-9 col-11 justify-content-center m-lg-0 m-auto fixedElement "
                                 style="overflow:scroll; height:610px;" id="rightDiv">
@@ -219,7 +261,7 @@
 
 
             <!-- JS  -->
-            
+
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
                 integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
                 crossorigin="anonymous"></script>
@@ -228,6 +270,32 @@
                 crossorigin="anonymous"></script>
             <script>
 
+                // to make profile button
+
+                window.addEventListener('resize', function () {
+                    "use strict";
+                    window.location.reload();
+                });
+
+                const large_size_div = document.getElementById('rightDiv');
+                const profile_btn = document.getElementById('dupbtn');
+
+
+                console.log(window.innerWidth)
+                if (window.innerWidth < 995) {
+                    large_size_div.style.display = "none";
+                    profile_btn.style.display = "block";
+                }
+                else {
+                    large_size_div.style.display = "block";
+                    profile_btn.style.display = "none";
+                }
+
+
+
+
+
+
                 // for category
 
                 const categories = document.querySelectorAll('.category');
@@ -235,6 +303,7 @@
                 categories.forEach(category => {
                     category.addEventListener('click', async (e) => {
                         const type = e.target.innerText;
+                        console.log(type)
                         e.preventDefault();
                         try {
                             const result = await fetch(`/articles/category/${type}`, {
@@ -245,7 +314,7 @@
                                 }
                             })
                             const data = await result;
-                            // console.log(data)
+                            // console.log(data.url)
                             location.assign(data.url);
                         }
                         catch (err) {

@@ -19,7 +19,7 @@ module.exports.other_profile_get = async (req, res) => {
 
     const articles = await Article.find({ createdById: user.id })
     
-    const totalPosts = await Article.find({createdById: res.locals.user._id})
+    const totalPosts = await Article.find({createdById: user.id})
 
     // console.log(articles)
     // res.json(articles)

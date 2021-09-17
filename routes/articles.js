@@ -5,7 +5,9 @@ const path = require('path');
 const { requireAuth, currentUser, userName } = require('./../middleware/login_signup_mw');
 const app = express();
 const multer = require('./../middleware/multer');
-const collect = require('collect.js');
+// const { body ,check , validationResult } = require('express-validator/check');
+// const bodyParser = require('body-parser');
+// const { userValidationRules, validate } = require('./../public/validators/article_validation.js')
 
 
 const template_path = path.join(__dirname, './templates/views');
@@ -20,12 +22,16 @@ router.get('/new', (req, res) => {
 
 
 router.get('/edit/:id', async (req, res) => {
+    
     const article = await Article.findById(req.params.id)
     res.render("edit", { article: article })
 })
 
 
 router.get('/:slug', async (req, res) => {
+
+    console.log(req.params.slug)
+
     const article = await Article.findOne({ slug: req.params.slug })
 
     const comment = article.comments
@@ -41,16 +47,18 @@ router.get('/:slug', async (req, res) => {
 })
 
 
-
 router.post('/', currentUser, multer.array('file'), async (req, res, next) => {
 
     // console.log(res.locals.user.email)   // current user is here
+
     req.article = new Article()
     next()
+    
 }, PostAndPut('new'))
 
-router.put('/:id', currentUser, multer.single('file'), async (req, res, next) => {
+router.put('/:id', currentUser, multer.array('file'), async (req, res, next) => {
     req.article = await Article.findById(req.params.id)
+    // console.log(req.article)
     next()
 }, PostAndPut('edit'))
 
@@ -67,19 +75,19 @@ function PostAndPut(path) {
         article.createdById = res.locals.user.id;
         // console.log(article.createdBy)
 
-        // image
-        // article.image = req.file.filename;
-        let imgArr = req.files
+        // // image
         article.image = req.files;
+        let imgArr = req.files
         // console.log(imgArr)
 
-        // category
+        // // category
         article.category = req.body.category;
         // console.log(article.category)
 
         try {
             article = await article.save()
-            res.redirect(`/articles/${article.slug}`)
+            console.log(article.id)
+            return res.redirect(`/articles/${article.slug}`)
         }
         catch (error) {
             console.log(error)
@@ -165,7 +173,7 @@ router.put("/comment/:id", currentUser, async (req, res) => {
 router.get('/category/:type', async (req, res) => {
     
     const cat_articles = await Article.find({ category: req.params.type })
-
+    console.log(cat_articles)
     if (cat_articles == undefined || cat_articles==null) {
         res.redirect('/home')
     }

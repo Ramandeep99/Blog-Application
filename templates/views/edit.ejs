@@ -3,78 +3,279 @@
 
 
     <body>
-        <%- include("../partials/navbar") %>
-            <div class="container-fluid">
-                <!-- to get space from sides -->
-                <div class="col-xl-6 col-lg-6 col-md-11 col-11 mx-auto mt-2 text-center">
+        <!-- <%- include("../partials/navbar") %> -->
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark" id="nav">
+            <a class="navbar-brand logo" href="#" id="logo">GO BLOG</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/home" id="home">Home</a>
+                    </li>
+                    <% if(user) { %>
 
-                    <h1 class="mb-4 mt-2 new_blog">Edit Article</h1>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="./../../login_signup/profile" id="username"> Welcome,
+                                <%= user.name %>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="./../../login_signup/logout" id="logout">Log out</a>
+                        </li>
+                        <% } else { %>
 
-                    <form action="/articles/<%= article.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input required value="<%=article.title %>" type="text" name="title" id="title"
-                                class="form-control">
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="./../../login_signup/login" id="login">Log in</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="./../../login_signup/register" id="signup">Sign
+                                    up</a>
+                            </li>
+                            <% } %>
 
-                        </div>
+                </ul>
+            </div>
+        </nav>
+        <br>
 
-                        <div class="form-group">
-                            <!-- <label for="description">Description</label>
-                            <input required value="<%= article.description %>" name="description" id="description"
-                                class="form-control"> -->
+        <div class="container-fluid">
+            <!-- to get space from sides -->
+            <div class="col-xl-6 col-lg-6 col-md-11 col-11 mx-auto text-center">
 
-                            <label for="description">Description</label>
-                            <textarea required value="<%= article.description %>" name="description" id="description"
-                                class="form-control"><%= article.description %></textarea>
+                <h1 class="mb-4  new_blog">Edit Article</h1>
 
-                        </div>
+                <form action="/articles/<%= article.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+                    <!-- <form enctype="multipart/form-data" id="form"> -->
+                    <!-- <p id="articleId" style="display: none; "><%= article.id %></p> -->
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input required style="height: 50px; font-size: 20px" value="<%=article.title %>" type="text"
+                            name="title" id="title" class="form-control">
 
-                        <div class="form-group mb-5">
-                            <!-- <label for="markdown">Markdown</label>
+                    </div>
+                    <span id="titlespan"></span>
+
+                    <div class="form-group">
+
+
+                        <label for="description">Description</label>
+                        <textarea style="font-size: 20px" required value="<%= article.description %>" name="description"
+                            id="description" class="form-control"><%= article.description %></textarea>
+
+                    </div>
+                    <span id="descriptionspan"></span>
+
+                    <div class="form-group mb-3">
+                        <!-- <label for="markdown">Markdown</label>
                             <input required value="<%= article.markdown %>" name="markdown" id="markdown"
                                 class="form-control" cols="40" rows="5"> -->
-                            <label for="markdown">Markdown</label>
-                            <textarea required value="<%= article.markdown %>" name="markdown" id="markdown"
-                                class="form-control"><%= article.markdown %></textarea>
+                        <label for="markdown">Markdown</label>
+                        <textarea required style="font-size: 20px" value="<%= article.markdown %>" name="markdown"
+                            id="markdown" class="form-control"><%= article.markdown %></textarea>
+                    </div>
+                    <span id="markdownspan"></span>
+
+                    <!-- image -->
+
+                    <div class="form-group text-center justify-content-center">
+                        <label for="image">Upload Image</label>
+                        <input required style="height: 50px; font-size: 20px;" type='file' name="file" id="image"
+                            class="form-control" accept="image/*" value="<%= article.image %>" multiple>
+                    </div>
+                    <span id="imagespan"></span>
+
+                    <div class="new_blog">
+                        <div class="btn-group my-4">
+                            <input required class="btn btns" name="category" list="browsers"
+                                placeholder="Select Category" id="category">
+                            <datalist id="browsers">
+                                <option value="Food">
+                                <option value="Technology">
+                                <option value="Internet">
+                                <option value="Agriculture">
+                                <option value="Cricket">
+                                <option value="Books">
+                                <option value="Travel">
+                                <option value="Music">
+                            </datalist>
                         </div>
+                    </div>
+                    <span id="categoryspan"></span>
 
-                        <!-- image -->
-                        <div>
-                            <div class="form-group mb-4 text-center justify-content-center">
-                                <label for="image">Upload Image</label>
-                                <input required type='file' name="file" id="image" class="form-control" accept="image/*" multiple>
-                            </div>
 
-                            <div class="new_blog">
-                                <div class="btn-group my-4">
-                                    <input required class="btn btns" name="category" list="browsers" placeholder="Select Category" id="category">
-                                    <datalist id="browsers">
-                                        <option value="Food">
-                                        <option value="Technology">
-                                        <option value="Internet">
-                                        <option value="Agriculture">
-                                        <option value="Cricket">
-                                        <option value="Books">
-                                        <option value="Travel">
-                                        <option value="Music">
-                                    </datalist>
-                                </div>
-                            </div>
-                        </div>
-
-                        <a href="/home" class="btn btn-primary btns mx-5">Cancel</a>
-                        <button class="btn btn-primary btns" type="submit">Save</button>
-                    </form>
-                </div>
+                    <a href="/home" class="btn btn-secondary btns mx-3">Cancel</a>
+                    <button class="btn btn-secondary btns mx-3" type="submit">Save</button>
+                </form>
+            </div>
 
 
 
-                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
                 integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
                 crossorigin="anonymous"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
                 integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
                 crossorigin="anonymous"></script>
+
+            <!-- <script>
+
+
+                    const formFields = document.querySelector('form');
+
+                    function validateTitle(username) {
+                        // var usernameRegex = /^[a-zA-Z]+$/;
+                        var usernameRegex = /^[a-z ,.'-]+$/i;
+                        return usernameRegex.test(username);
+                    }
+
+
+                    formFields.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+
+                        // get values 
+                        const title = formFields.title.value;
+                        const description = formFields.description.value;
+                        const markdown = formFields.markdown.value;
+                        const images = formFields.file.files
+                        const category = formFields.category.value;
+
+                        // get notification spans
+                        const titleNotify = document.getElementById('titlespan')
+                        const descriptionNotify = document.getElementById('descriptionspan')
+                        const markdownNotify = document.getElementById('markdownspan')
+                        const categoryNotify = document.getElementById('categoryspan')
+                        const imageNotify = document.getElementById('imagespan')
+
+
+
+                        let titlePass1 = false, titlePass2 = false, descriptionPass = false, markdownPass = false, categoryPass = false, imagePass = true;
+
+
+
+                        if (title.trim().length <= 2) {
+
+                            titleNotify.innerHTML = '<div class="alert alert-warning">Please enter title of length >= 3</div>';
+                            setTimeout(() => {
+                                titleNotify.innerHTML = '';
+                            }, 3000)
+
+                        } else { titlePass1 = true }
+
+                        if (titlePass1 && validateTitle(title) == false) {
+
+
+                            titleNotify.innerHTML = '<div class="alert alert-warning">Please enter alphabets only</div>';
+                            setTimeout(() => {
+                                titleNotify.innerHTML = '';
+                            }, 3000)
+
+                        } else { titlePass2 = true }
+
+
+                        if (description.trim().length === 0 && titlePass2 && titlePass1) {
+
+                            descriptionNotify.innerHTML = '<div class="alert alert-warning">Please enter description.</div>';
+                            setTimeout(() => {
+                                descriptionNotify.innerHTML = '';
+                            }, 3000)
+
+                        } else { descriptionPass = true }
+
+
+                        if (markdown.trim().length === 0 && titlePass2 && descriptionPass && titlePass1) {
+
+                            markdownNotify.innerHTML = '<div class="alert alert-warning">Please enter  markdown.</div>';
+                            setTimeout(() => {
+                                markdownNotify.innerHTML = '';
+                            }, 3000)
+
+                        } else { markdownPass = true }
+
+
+                        // console.log(images)
+                        var count = 0;
+                        Array.from(images).forEach(image => {
+                            // console.log(image.type)
+                            if (image.type == 'image/jpeg' || image.type == 'image/jpg' || image.type == 'image/png') {
+                                // imagePass = true;
+                                count = 1;
+                            }
+                            else {
+                                imagePass = false;
+                            }
+                        });
+
+                        if (count == 0 && titlePass2 && descriptionPass && markdownPass && titlePass1) {
+                            imageNotify.innerHTML = '<div class="alert alert-warning">Please select images</div>';
+                            setTimeout(() => {
+                                imageNotify.innerHTML = '';
+                            }, 3000)
+                        }
+
+
+                        if (imagePass == false && titlePass2 && descriptionPass && markdownPass && titlePass1) {
+                            imageNotify.innerHTML = '<div class="alert alert-warning">Please select only image format files.</div>';
+                            setTimeout(() => {
+                                imageNotify.innerHTML = '';
+                            }, 3000)
+                        }
+
+                        // console.log(imagePass)
+
+                        if (category.trim().length === 0 && titlePass2 && descriptionPass && markdownPass && titlePass1 && imagePass && count) {
+
+                            categoryNotify.innerHTML = '<div class="alert alert-warning">Please select a category.</div>';
+                            setTimeout(() => {
+                                categoryNotify.innerHTML = '';
+                            }, 3000)
+
+                        } else { categoryPass = true }
+
+                        if (titlePass2 && descriptionPass && markdownPass && categoryPass && titlePass1 && imagePass && count) {
+
+                            // console.log(title, titlePass2)
+                            // console.log(description, descriptionPass)
+                            // console.log(markdown, markdownPass)
+                            // console.log(category, categoryPass)
+
+                            const formData = new FormData(document.getElementById("form"));
+                            console.log(formData)
+
+                            try {
+
+                                const articleid = document.getElementById('articleId').innerText;
+                                console.log(articleid)
+
+                                
+                                const res = await fetch(`/articles/${articleid}`, {
+                                    method: 'PUT',
+                                    body: formData
+                                })
+                                
+                                
+                                const url = await res.url;
+                                console.log(url)
+                                location.assign(url)
+
+                            }
+                            catch (err) {
+                                console.log(err);
+                            }
+                        }
+
+                        else {
+                            console.log(100)
+                        }
+
+
+
+
+                    })
+
+
+                </script> -->
     </body>
 
     </html>
