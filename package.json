@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "nodemon server.js -e js,ejs,css",
     "start": "node server.js"
-    
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ramandeep99/Blog-Application.git"
   },
   "author": "raman",
   "license": "ISC",

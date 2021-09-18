@@ -61,7 +61,7 @@ app.use('/articles',articleRouter)
 // app.use('/user',otherUser)
 
 app.listen(port ,() =>{
-    console.log(`Server is started from ${port} port`);
+    console.log(`App running from ${port} port`);
 });  
 
 
