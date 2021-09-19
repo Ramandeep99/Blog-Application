@@ -13,7 +13,7 @@ const cookieParser = require('cookie-parser');
 const { json } = require('express');
 const {requireAuth , currentUser} = require('./middleware/login_signup_mw');
 const logger = require('morgan')
-const port = process.env.PORT || 2000;
+const port = process.env.PORT || 80;
 const moment = require("moment");
 
 
@@ -74,7 +74,3 @@ app.use('/login_signup',userRouter)
 app.use('/articles',articleRouter)
 // app.use('/user',otherUser)
 
-
-
-
-// have to add created at in comment schema
