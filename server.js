@@ -27,7 +27,7 @@ dotenv.config({path : './config.env'});
 // })
 
 // connect to Atlas
-const dbURI = "mongodb+srv://Coding_RDX:Raman@1234@blogcluster.rj7it.mongodb.net/blogdb?retryWrites=true&w=majority"
+const dbURI = process.env.DATABASE.replace("<PASSWORD>" ,process.env.PASSWORD );
 mongoose.connect(dbURI ,{
     useUnifiedTopology: true, useCreateIndex: true, useNewUrlParser: true 
 }).then( (res) => app.listen(port ,() =>{console.log(`App running from ${port} port`)}))
