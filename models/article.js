@@ -36,7 +36,7 @@ const articleSchema = new mongoose.Schema({
     likes:[{type: Schema.Types.ObjectId , ref:'user'}],
     comments:[{type:Schema.Types.Object}]
     
-})
+} , {timestamps : true})
 
 
 

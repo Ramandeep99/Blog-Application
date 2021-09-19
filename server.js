@@ -22,9 +22,17 @@ const moment = require("moment");
 dotenv.config({path : './config.env'});
 
 // connection to database
-mongoose.connect('mongodb://localhost:27017/blogdb' ,{
+// mongoose.connect('mongodb://localhost:27017/blogdb' ,{
+//     useUnifiedTopology: true, useCreateIndex: true, useNewUrlParser: true 
+// })
+
+// connect to Atlas
+const dbURI = "mongodb+srv://Coding_RDX:Raman@1234@blogcluster.rj7it.mongodb.net/blogdb?retryWrites=true&w=majority"
+mongoose.connect(dbURI ,{
     useUnifiedTopology: true, useCreateIndex: true, useNewUrlParser: true 
-})
+}).then( (res) => app.listen(port ,() =>{console.log(`App running from ${port} port`)}))
+  .catch((err) => console.log(err));
+
 
 // middlewalres
 app.use(express.urlencoded({extended:false}))
@@ -60,9 +68,7 @@ app.use('/login_signup',userRouter)
 app.use('/articles',articleRouter)
 // app.use('/user',otherUser)
 
-app.listen(port ,() =>{
-    console.log(`App running from ${port} port`);
-});  
+
 
 
 // have to add created at in comment schema

@@ -30,7 +30,7 @@ router.get('/edit/:id', async (req, res) => {
 
 router.get('/:slug', async (req, res) => {
 
-    console.log(req.params.slug)
+    // console.log(req.params.slug)
 
     const article = await Article.findOne({ slug: req.params.slug })
 
@@ -73,20 +73,16 @@ function PostAndPut(path) {
         // trying to save current user email in during post in articles collection
         article.createdBy = res.locals.user;
         article.createdById = res.locals.user.id;
-        // console.log(article.createdBy)
 
         // // image
         article.image = req.files;
-        let imgArr = req.files
-        // console.log(imgArr)
 
         // // category
         article.category = req.body.category;
-        // console.log(article.category)
 
         try {
             article = await article.save()
-            console.log(article.id)
+            // console.log(article.id)
             return res.redirect(`/articles/${article.slug}`)
         }
         catch (error) {
@@ -99,11 +95,9 @@ function PostAndPut(path) {
 router.delete('/:id', currentUser, async (req, res) => {
     const databaseUser = await Article.findById(req.params.id);
     const UserMail = databaseUser.createdBy.email;
-    // res.locals.UserMail = UserMail;
-    // console.log(databaseUser)
-    // console.log(res.locals.UserMail, res.locals.user.email)
+
     const currentMail = res.locals.user.email;
-    // console.log(UserMail, currentMail);
+
     if (UserMail === currentMail) {
         await Article.findByIdAndDelete(req.params.id)
         res.redirect('/home')
@@ -173,7 +167,7 @@ router.put("/comment/:id", currentUser, async (req, res) => {
 router.get('/category/:type', async (req, res) => {
     
     const cat_articles = await Article.find({ category: req.params.type })
-    console.log(cat_articles)
+    // console.log(cat_articles)
     if (cat_articles == undefined || cat_articles==null) {
         res.redirect('/home')
     }

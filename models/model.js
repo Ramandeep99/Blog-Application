@@ -30,7 +30,7 @@ const detailSchema = new mongoose.Schema({
     followers:[{type: Schema.Types.ObjectId , ref:'Detail'}],
     following:[{type: Schema.Types.ObjectId , ref:'Detail'}],
     bookmarks:[{type: Schema.Types.ObjectId , ref:'Article'}],
-})
+}  , {timestamps : true})
 
 detailSchema.pre("save" , async function(next){
     if(this.isModified("password")){
