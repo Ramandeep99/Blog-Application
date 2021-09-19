@@ -13,7 +13,7 @@ const cookieParser = require('cookie-parser');
 const { json } = require('express');
 const {requireAuth , currentUser} = require('./middleware/login_signup_mw');
 const logger = require('morgan')
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 2000;
 const moment = require("moment");
 
 
@@ -60,10 +60,10 @@ app.get('/',async (req,res) =>{
 })
 
 
-app.get('/' , requireAuth ,  async (req,res) =>{
-    const articles = await Article.find().sort({ createdAt: 'desc'})
-    res.render('home' , {articles : articles});
-})
+// app.get('/' , requireAuth ,  async (req,res) =>{
+//     const articles = await Article.find().sort({ createdAt: 'desc'})
+//     res.render('home' , {articles : articles});
+// })
 
 app.get('/home' , requireAuth ,  async (req,res) =>{
     const articles = await Article.find().sort({ createdAt: 'desc'})

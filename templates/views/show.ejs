@@ -257,8 +257,8 @@
 
                             const data = formFields.comment.value;
 
-                            console.log(postId)
-                            console.log(data)
+                            // console.log(postId)
+                            // console.log(data)
                             try {
                                 const commented = await fetch(`/articles/comment/${postId}`, {
 
@@ -269,7 +269,8 @@
                                     },
                                     body: JSON.stringify({ data }),
                                 })
-                                console.log(commented)
+                                // console.log(commented)
+                                location.reload()
                             }
                             catch (err) {
                                 console.log('err')
