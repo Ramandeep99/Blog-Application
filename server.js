@@ -59,6 +59,12 @@ app.get('/',async (req,res) =>{
     res.render('login' , {articles : articles}); 
 })
 
+
+app.get('/' , requireAuth ,  async (req,res) =>{
+    const articles = await Article.find().sort({ createdAt: 'desc'})
+    res.render('home' , {articles : articles});
+})
+
 app.get('/home' , requireAuth ,  async (req,res) =>{
     const articles = await Article.find().sort({ createdAt: 'desc'})
     res.render('home' , {articles : articles});
