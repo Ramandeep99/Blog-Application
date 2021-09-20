@@ -55,8 +55,7 @@ app.set('views' , path.join(__dirname ,'/templates/views'))
 // routes
 app.get('*' , currentUser)  // to apply this middleware to all the routes
 app.get('/',async (req,res) =>{
-    const articles = await Article.find().sort({ createdAt: 'desc'})
-    res.render('login' , {articles : articles}); 
+    res.render('login');
 })
 
 

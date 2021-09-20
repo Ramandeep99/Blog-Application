@@ -13,29 +13,16 @@
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav ml-auto">
-                    <!-- <% user %> -->
-                    <!-- <% if(user) { %>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="/home" id="home">Home</a>
-                        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="./../login_signup/profile" id="username"> Welcome, <%=
-                                    user.name %> </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="./../login_signup/logout" id="logout">Log out</a>
-                        </li>
-                        <% } else { %> -->
-                            
 
-                            <li class="nav-item">
-                                <a class="nav-link text-light" href="./../login_signup/login" id="login">Log in</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" href="./../login_signup/register" id="signup">Sign up</a>
-                            </li>
-                            <!-- <% } %> -->
+
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="./../login_signup/login" id="login">Log in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="./../login_signup/register" id="signup">Sign up</a>
+                    </li>
+
 
                 </ul>
             </div>
@@ -97,8 +84,6 @@
 
             const formFields = document.querySelector('form');
 
-            // const email_error = document.querySelector('.form-email');
-            // const password_error = document.querySelector('.form-password');
 
             const email_error = document.getElementById('emailError');
             const password_error = document.getElementById('passwordError');
@@ -107,15 +92,9 @@
             formFields.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
-                // reset error-divs
-                // email_error.innerText = "";
-                // password_error.innerText = "";
-
                 // get values 
                 const email = formFields.email.value;
                 const password = formFields.password.value;
-
-
 
                 try {
                     const res = await fetch('/login_signup/login', {
