@@ -112,17 +112,24 @@
                                             </p>
                                             <div class="d-flex justify-content-between left_div_btns">
                                                 <div>
-                                                    <button class="left_div__like" id="like_btn">
-                                                        <!-- <i class="far fa-thumbs-up"></i> -->
-                                                        Edit
-                                                    </button>
+        
+                                                    <button class="left_div__edit"><a class="left_div__edit"
+                                                            href="/articles/edit/<%= article.id %>"
+                                                            id="edit_btn">Edit</a></button>
+        
                                                 </div>
+                                                
+        
                                                 <div>
-                                                    <button class="left_div__save" id="save_btn">
-                                                        <!-- <i class="far fa-bookmark"></i>  -->
-                                                        Delete
-                                                    </button>
+        
+                                                    <form class="d-inline delete-btn"
+                                                        action="/articles/<%= article.id %>?_method=DELETE" method="POST">
+                                                        <button type="submit" class="left_div__delete" id="delete_btn">
+                                                            Delete
+                                                        </button>
+                                                    </form>
                                                 </div>
+        
                                             </div>
                                         </div>
 
